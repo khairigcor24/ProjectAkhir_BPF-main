@@ -23,9 +23,11 @@ Route::get('/home', function () {
 
 Route::get('/users', [UserController::class, 'index'])->name('user.index');
 
-Route::get('/profile', function () {
-    return view('profile.edit');
-})->name('profile.edit');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
+});
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
