@@ -32,22 +32,22 @@
             <li class="header-title">{{ __('Sidebar Images') }}</li>
             <li class="active">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="{{ asset('/light-bootstrap/img/sidebar-1.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/sidebar-1.jpg') }}" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="{{ asset('light-bootstrap/img/sidebar-3.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/sidebar-3.jpg') }}" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="{{ asset('light-bootstrap/img/sidebar-4.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/sidebar-4.jpg') }}" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="{{ asset('light-bootstrap/img/sidebar-5.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/sidebar-5.jpg') }}" alt="" />
                 </a>
             </li>
             <li class="button-container">

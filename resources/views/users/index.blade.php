@@ -352,7 +352,7 @@
                                 </p>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="#" class="btn btn-sm btn-default">Add user</a>
+                                <a href="{{ route('user.create') }}" class="btn btn-sm btn-default">Add user</a>
                             </div>
                         </div>
                     </div>
@@ -380,18 +380,25 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                            
-                                                                        <tr>
-                                        <td>Admin Admin</td>
-                                        <td>admin@lightbp.com</td>
-                                        <td>2020-02-25 12:37:04</td>
-                                        <td class="d-flex justify-content-end">
-                                                
-                                                <a href="#"><i class="fa fa-edit"></i></a>
-                                                                                        </td>
-                                    </tr>
-                                                                </tbody>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
+                                    <td class="d-flex justify-content-end">
+                                        <a href="{{ route('user.show', $user) }}" class="btn btn-sm btn-info">View</a>
+                                        <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-warning ml-1">Edit</a>
+                                        <form action="{{ route('user.destroy', $user) }}" method="POST" class="d-inline ml-1">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
