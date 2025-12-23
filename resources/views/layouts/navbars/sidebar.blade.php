@@ -7,7 +7,7 @@ Tip 2: you can also add an image using data-image tag
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="http://www.creative-tim.com" class="simple-text">
-                {{ __("Creative Tim") }}
+                {{ __("SEJAHTERA") }}
             </a>
         </div>
         <ul class="nav">
@@ -17,7 +17,7 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Dashboard") }}</p>
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
                     <i>

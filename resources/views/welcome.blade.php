@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'SEJAHTERA'])
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{asset('light-bootstrap/img/full-screen-image-2.jpg')}}">
@@ -6,7 +6,8 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-7 col-md-8">
-                        <h1 class="text-white text-center">{{ __('Welcome to Light Bootstrap Dashboard FREE Laravel Live Preview.') }}</h1>
+                        <h1 class="text-center text-white">{{ __('SEJAHTERA') }}</h1>
+                        <h1 class="text-center text-white">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
                     </div>
                 </div>
             </div>
