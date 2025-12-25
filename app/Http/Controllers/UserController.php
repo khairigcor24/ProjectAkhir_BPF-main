@@ -16,7 +16,21 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        $perPage = request('per_page', 15);
+        $search = request('search');
+
+        $query = $model->newQuery();
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate($perPage)->withQueryString();
+
+        return view('users.index', compact('users'));
     }
 
     /**

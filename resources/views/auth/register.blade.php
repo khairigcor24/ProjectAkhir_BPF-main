@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'SEJAHTERA'])
 
 @section('content')
-    <div class="full-page register-page section-image" data-color="orange" data-image="{{ asset('light-bootstrap/img/bg5.jpg') }}">
+    <div class="full-page register-page section-image" data-color="orange" data-image="{{ asset('assets/img/bg5.jpg') }}">
         <div class="content">
             <div class="container">
                 <div class="text-center card card-register card-plain">

@@ -14,7 +14,16 @@ class PageController extends Controller
     public function index($page)
     {
         if (view()->exists("pages.{$page}")) {
-            return view("pages.{$page}");
+            $title = 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION';
+            $navName = ucfirst($page);
+            $activeButton = 'laravel';
+            
+            return view("pages.{$page}", [
+                'activePage' => $page,
+                'title' => $title,
+                'navName' => $navName,
+                'activeButton' => $activeButton
+            ]);
         }
         return abort(404);
     }
