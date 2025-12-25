@@ -97,10 +97,10 @@
                                 <div class="author">
                                     <a href="#">
                                         <img class="avatar border-gray" src="{{ asset('assets/img/faces/face-3.jpg') }}" alt="...">
-                                        <h5 class="title">{{ __('Mike Andrew') }}</h5>
+                                        <h5 class="title">{{ __('Farhan Al Khairi') }}</h5>
                                     </a>
                                     <p class="description">
-                                        {{ __('michael24') }}
+                                        {{ __('Farhan24') }}
                                     </p>
                                 </div>
                                 <p class="description text-center">
