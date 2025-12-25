@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'SEJAHTERA', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -7,8 +7,7 @@
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <h4 class="card-title">Striped Table with Hover</h4>
-                            <p class="card-category">Here is a subtitle for this table</p>
+                            <h4 class="card-title">Table Data Penerima Bansos</h4>
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover table-striped">
@@ -70,8 +69,8 @@
                 <div class="col-md-12">
                     <div class="card card-plain table-plain-bg">
                         <div class="card-header ">
-                            <h4 class="card-title">Table on Plain Background</h4>
-                            <p class="card-category">Here is a subtitle for this table</p>
+                            <h4 class="card-title">Daerah Penerima Bansos</h4>
+                            {{-- <p class="card-category">Here is a subtitle for this table</p> --}}
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover">

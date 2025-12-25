@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'dashboard', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Dashboard', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'dashboard', 'title' => 'SEJAHTERA', 'navName' => 'Dashboard', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -51,7 +51,7 @@
                 <div class="col-md-6">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('2017 Sales') }}</h4>
+                            <h4 class="card-title">{{ __('Bansos 2025') }}</h4>
                             <p class="card-category">{{ __('All products including Taxes') }}</p>
                         </div>
                         <div class="card-body ">
