@@ -19,7 +19,7 @@ Tip 2: you can also add an image using data-image tag
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
+                <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if(isset($activeButton) && $activeButton =='laravel') aria-expanded="true" @endif>
                     <i>
                         <img src="{{ asset('assets/img/laravel.svg') }}" style="width:25px">
                     </i>
@@ -28,7 +28,7 @@ Tip 2: you can also add an image using data-image tag
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse @if($activeButton =='laravel') show @endif" id="laravelExamples">
+                <div class="collapse @if(isset($activeButton) && $activeButton =='laravel') show @endif" id="laravelExamples">
                     <ul class="nav">
                         <li class="nav-item @if($activePage == 'user') active @endif">
                             <a class="nav-link" href="{{route('profile.edit')}}">
