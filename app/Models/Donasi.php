@@ -39,6 +39,14 @@ class Donasi extends Model
     }
 
     /**
+     * Alias untuk method validator (untuk kompatibilitas)
+     */
+    public function user()
+    {
+        return $this->validator();
+    }
+
+    /**
      * Scope untuk filter berdasarkan status
      */
     public function scopeByStatus($query, $status)
