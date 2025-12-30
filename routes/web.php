@@ -4,8 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\DonasiController;
+use App\Http\Controllers\GuestDonasiController;
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;   
 use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
