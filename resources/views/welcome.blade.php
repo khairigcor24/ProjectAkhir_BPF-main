@@ -1,7 +1,9 @@
 @extends('layouts/app', ['activePage' => 'welcome', 'title' => 'SEJAHTERA'])
 
 @section('content')
-    <div class="full-page section-image" data-color="black" data-image="{{asset('assets/img/full-screen-image-2.jpg')}}">
+    <div class="full-page section-image"
+     data-color="black"
+      data-image="{{asset('assets/img/Welcome/Bansos_1.jpeg')}}">
         <div class="content">
             <div class="container">
                 <div class="row justify-content-center">
@@ -18,7 +20,19 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            demo.checkFullPageBackgroundImage();
+
+            const images = [
+                '{{asset("assets/img/Welcome/Bansos_1.jpeg")}}',
+                '{{asset("assets/img/Welcome/Bansos_2.jpeg")}}',
+                '{{asset("assets/img/Welcome/Bansos_3.jpeg")}}',
+            ]
+
+            let i = 0;
+            setInterval(() => {
+                i = (i + 1) % images.length;
+                $('.full-page').css('background-image',
+                `url(${images[i]})`);
+            }, 4000); // Mengganti gambar selama 4 detik
 
             setTimeout(function() {
                 // after 1000 ms we add the class animated to the login/register card

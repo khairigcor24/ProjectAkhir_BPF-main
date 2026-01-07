@@ -24,7 +24,7 @@ Tip 2: you can also add an image using data-image tag
                         <img src="{{ asset('assets/img/laravel.svg') }}" style="width:25px">
                     </i>
                     <p>
-                        {{ __('Laravel example') }}
+                        {{ __('User') }}
                         <b class="caret"></b>
                     </p>
                 </a>
