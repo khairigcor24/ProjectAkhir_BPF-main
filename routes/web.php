@@ -8,8 +8,9 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonasiController;
-use App\Http\Controllers\GuestDonasiController;
+use App\Http\Controllers\BansosController;
 use App\Models\Bansos;
+
 /*
 |--------------------------------------------------------------------------
 | PUBLIC (BELUM LOGIN)
@@ -49,17 +50,32 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
 });
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Kelola Staff
+    Route::resource('users', UserController::class);
 
-Route::get('/page/{page}', [PageController::class, 'index'])->name('page.index');
+    // CRUD Bansos
+    // Route::resource('bansos', BansosController::class);
 
-Route::resource('user', UserController::class);
+    // Laporan
+    // Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
+});
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
-Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
-Route::get('/forgot-password', function () { return 'Forgot Password'; })->name('password.request');
+/*
+|--------------------------------------------------------------------------
+| STAFF ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'staff'])->prefix('staff')->name('staff.')->group(function () {
+    // CRUD terbatas, misal validasi donasi
+    Route::get('donasi', [DonasiController::class, 'index'])->name('donasi.index');
+    Route::post('donasi/{donasi}/validate', [DonasiController::class, 'validateDonasi'])->name('donasi.validate');
+});
 
 // ============================================
 // GUEST ROUTES (Public - No Auth Required)
