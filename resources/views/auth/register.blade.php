@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'SEJAHTERA'])
 
 @section('content')
-    <div class="full-page register-page section-image" data-color="orange" data-image="{{ asset('assets/img/bg5.jpg') }}">
+    <div class="full-page register-page section-image" data-color="orange" data-image="{{ asset('assets/img/BagiBansos.jpeg') }}">
         <div class="content">
             <div class="container">
                 <div class="text-center card card-register card-plain">
@@ -15,8 +15,8 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>{{ __('Free Account') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
+                                        <h4>{{ __('Transparansi Penyaluran') }}</h4>
+                                        <p>{{ __('Sistem ini membantu memastikan penyaluran bantuan sosial dilakukan secara transparan, tercatat, dan dapat dipantau oleh pihak terkait.') }}</p>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -26,8 +26,8 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>{{ __('Awesome Performances') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
+                                        <h4>{{ __('Akses Sesuai Peran') }}</h4>
+                                        <p>{{ __('Setiap pengguna mendapatkan akses sesuai perannya, baik sebagai admin, staff, maupun pengguna umum, sehingga pengelolaan data tetap aman dan terkontrol.') }}</p>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -37,8 +37,8 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>{{ __('Global Support') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
+                                        <h4>{{ __('Layanan Terintegrasi') }}</h4>
+                                        <p>{{ __('Seluruh proses mulai dari pendaftaran penerima, verifikasi data, hingga pelaporan bantuan terhubung dalam satu sistem yang terintegrasi.') }}</p>
                                     </div>
                                 </div>
                             </div>

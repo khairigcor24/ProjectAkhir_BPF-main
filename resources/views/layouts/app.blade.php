@@ -1,6 +1,6 @@
-<!-- 
+<!--
 =========================================================
- Light Bootstrap Dashboard - v2.0.1
+SEJAHTERA - v2.0.1
 =========================================================
 
  Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
@@ -47,7 +47,7 @@
             </div>
 
         </div>
-       
+
 
 
     </body>
@@ -72,7 +72,7 @@
     @stack('js')
     <script>
       $(document).ready(function () {
-        
+
         $('#facebook').sharrre({
           share: {
             facebook: true

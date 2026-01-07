@@ -1,7 +1,7 @@
 @extends('layouts/app', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
 
 @section('content')
-    <div class="full-page section-image" data-color="black" data-image="{{ asset('assets/img/full-screen-image-2.jpg') }}">
+    <div class="full-page section-image" data-color="black" data-image="{{ asset('assets/img/SenangBantu.jpeg') }}">
         <div class="content pt-5">
             <div class="container mt-5">
                 <div class="col-md-4 col-sm-6 ml-auto mr-auto">
@@ -54,7 +54,7 @@
                                         <button type="submit" class="btn btn-warning btn-wd">{{ __('Login') }}</button>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <a class="btn btn-link"  style="color:#23CCEF" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link"  style="color:#23CCEF" href="#">
                                         {{ __('Forgot password?') }}
                                         </a>
                                         <a class="btn btn-link" style="color:#23CCEF" href="{{ route('register') }}">

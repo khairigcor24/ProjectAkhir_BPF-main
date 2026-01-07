@@ -14,10 +14,20 @@ class PageController extends Controller
     public function index($page)
     {
         if (view()->exists("pages.{$page}")) {
-            $title = 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION';
+            $title = match ($page) {
+                'home' => 'SEJAHTERA | Beranda',
+                'dashboard' => 'SEJAHTERA | Dashboard',
+                'login' => 'SEJAHTERA | Login',
+                'register' => 'SEJAHTERA | Daftar',
+                'about' => 'SEJAHTERA | Tentang Kami',
+                'services' => 'SEJAHTERA | Layanan',
+                'contact' => 'SEJAHTERA | Kontak',
+                'blog' => 'SEJAHTERA | Blog',
+                default => 'SEJAHTERA | Sistem Bansos'
+            };
             $navName = ucfirst($page);
             $activeButton = 'laravel';
-            
+
             return view("pages.{$page}", [
                 'activePage' => $page,
                 'title' => $title,

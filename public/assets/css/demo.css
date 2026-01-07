@@ -836,3 +836,11 @@
 {
     color:#fff;
 }
+
+.full-page {
+    transition: opacity 1.2s ease-in-out;
+}
+
+.full-page.fade-out{
+    opacity: 0;
+}

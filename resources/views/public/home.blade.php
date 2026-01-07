@@ -1,21 +1,25 @@
-@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'SEJAHTERA'])
+@extends('layouts.public')
 
 @section('content')
-    <div class="full-page section-image"
+<div class="full-page section-image"
      data-color="black"
-      data-image="{{asset('assets/img/Welcome/Bansos_1.jpeg')}}">
-        <div class="content">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7 col-md-8">
-                        <h1 class="text-center text-white">{{ __('SEJAHTERA') }}</h1>
-                        <h1 class="text-center text-white">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
-                    </div>
+     data-image="{{ asset('assets/img/Welcome/Bansos_1.jpeg') }}">
+
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-8">
+                    <h1 class="text-center text-white">SEJAHTERA</h1>
+                    <h3 class="text-center text-white">
+                        Hadir untuk membantu, dirancang untuk melayani.
+                    </h3>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
+
 
 @push('js')
     <script>

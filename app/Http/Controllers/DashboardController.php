@@ -11,8 +11,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view ('admin.dashboard');
-    }
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            return view('dashboard.admin');
+        } 
+        
+        if ($user->hasRole('staff')) {
+            return view('dashboard.staff');
+        }
+        
+            return view('dashboard.guest');
+        }
 
     /**
      * Show the form for creating a new resource.
