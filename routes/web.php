@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -10,19 +9,21 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\GuestDonasiController;
-
+use App\Models\Bansos;
 /*
 |--------------------------------------------------------------------------
 | PUBLIC (BELUM LOGIN)
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
-    return view('public.home');
+    $semua_bansos = Bansos::where('status', 'aktif')->get();
+    return view('welcome', compact('semua_bansos'));
 });
 
 Route::get('/donasi', [GuestDonasiController::class, 'index'])->name('donasi.public');
 Route::get('/donasi/search', [GuestDonasiController::class, 'search'])->name('donasi.search');
-Route::get('/info-bansos', [BansosController::class, 'publicIndex'])->name('info.bansos');
+
 /*
 |--------------------------------------------------------------------------
 | AUTH
