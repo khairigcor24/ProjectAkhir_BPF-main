@@ -9,7 +9,7 @@
                         <div class="col-md-8 ml-auto mr-auto">
                             <div class="card">
                                 <div class="header text-center">
-                                    <h4 class="title">{{ __('Light Bootstrap Dashboard')}}</h4>
+                                    <h4 class="title">{{ __('SEJAHTERA | Sistem Bansos')}}</h4>
                                     <p class="category">{{ __('Are you looking for more components? Please check our Premium Version of Light Bootstrap Dashboard Laravel.')}}</p>
                                     <br>
                                 </div>

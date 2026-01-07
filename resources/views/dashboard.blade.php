@@ -7,15 +7,15 @@
                 <div class="col-md-4">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Email Statistics') }}</h4>
-                            <p class="card-category">{{ __('Last Campaign Performance') }}</p>
+                            <h4 class="card-title">{{ __('Statistik Bantuan') }}</h4>
+                            <p class="card-category">{{ __('Distribusi Bantuan Sosial') }}</p>
                         </div>
                         <div class="card-body ">
                             <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
                             <div class="legend">
-                                <i class="fa fa-circle text-info"></i> {{ __('Open') }}
-                                <i class="fa fa-circle text-danger"></i> {{ __('Bounce') }}
-                                <i class="fa fa-circle text-warning"></i> {{ __('Unsubscribe') }}
+                                <i class="fa fa-circle text-info"></i> {{ __('Tersalurkan') }}
+                                <i class="fa fa-circle text-danger"></i> {{ __('Pending') }}
+                                <i class="fa fa-circle text-warning"></i> {{ __('Ditolak') }}
                             </div>
                             <hr>
                             <div class="stats">
@@ -27,17 +27,17 @@
                 <div class="col-md-8">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Users Behavior') }}</h4>
-                            <p class="card-category">{{ __('24 Hours performance') }}</p>
+                            <h4 class="card-title">{{ __('Aktivitas Penyaluran') }}</h4>
+                            <p class="card-category">{{ __('24 Jam Terakhir') }}</p>
                         </div>
                         <div class="card-body ">
                             <div id="chartHours" class="ct-chart"></div>
                         </div>
                         <div class="card-footer ">
                             <div class="legend">
-                                <i class="fa fa-circle text-info"></i> {{ __('Open') }}
-                                <i class="fa fa-circle text-danger"></i> {{ __('Click') }}
-                                <i class="fa fa-circle text-warning"></i> {{ __('Click Second Time') }}
+                                <i class="fa fa-circle text-info"></i> {{ __('Pengajuan') }}
+                                <i class="fa fa-circle text-danger"></i> {{ __('Diverifikasi') }}
+                                <i class="fa fa-circle text-warning"></i> {{ __('Disalurkan') }}
                             </div>
                             <hr>
                             <div class="stats">
