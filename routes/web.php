@@ -11,7 +11,7 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('welcome');
 });
- 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -51,24 +51,9 @@ Route::prefix('guest')->name('guest.')->group(function () {
 });
 
 // ============================================
-// ADMIN OR STAFF ROUTES (Both can access)
-// ============================================
-Route::middleware(['auth', 'adminOrStaff'])->group(function () {
-    // Index - Admin melihat Table, Staff melihat Card/List (dihandle di controller)
-    Route::get('donasi', [App\Http\Controllers\DonasiController::class, 'index'])->name('donasi.index');
-    
-    // Show detail
-    Route::get('donasi/{donasi}', [App\Http\Controllers\DonasiController::class, 'show'])->name('donasi.show');
-    
-    // Validasi donasi (Admin dan Staff)
-    Route::post('donasi/{donasi}/validate', [App\Http\Controllers\DonasiController::class, 'validateDonasi'])->name('donasi.validate');
-    
-    // Laporan (Admin dan Staff)
-    Route::get('donasi/laporan', [App\Http\Controllers\DonasiController::class, 'laporan'])->name('donasi.laporan');
-});
-
-// ============================================
 // ADMIN ONLY CRUD ROUTES
+// Route spesifik HARUS ditempatkan SEBELUM route dengan parameter {donasi}
+// untuk menghindari konflik routing (create/edit akan ditangkap oleh {donasi})
 // ============================================
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('donasi/create', [App\Http\Controllers\DonasiController::class, 'create'])->name('donasi.create');
@@ -76,5 +61,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('donasi/{donasi}/edit', [App\Http\Controllers\DonasiController::class, 'edit'])->name('donasi.edit');
     Route::put('donasi/{donasi}', [App\Http\Controllers\DonasiController::class, 'update'])->name('donasi.update');
     Route::delete('donasi/{donasi}', [App\Http\Controllers\DonasiController::class, 'destroy'])->name('donasi.destroy');
+});
+
+// ============================================
+// ADMIN OR STAFF ROUTES (Both can access)
+// Route dengan parameter {donasi} HARUS ditempatkan SETELAH route spesifik
+// ============================================
+Route::middleware(['auth', 'adminOrStaff'])->group(function () {
+    // Index - Admin melihat Table, Staff melihat Card/List (dihandle di controller)
+    Route::get('donasi', [App\Http\Controllers\DonasiController::class, 'index'])->name('donasi.index');
+
+    // Laporan (Admin dan Staff) - HARUS sebelum route dengan parameter
+    Route::get('donasi/laporan', [App\Http\Controllers\DonasiController::class, 'laporan'])->name('donasi.laporan');
+
+    // Show detail - HARUS setelah route spesifik seperti /laporan dan /create
+    Route::get('donasi/{donasi}', [App\Http\Controllers\DonasiController::class, 'show'])->name('donasi.show');
+
+    // Validasi donasi (Admin dan Staff)
+    Route::post('donasi/{donasi}/validate', [App\Http\Controllers\DonasiController::class, 'validateDonasi'])->name('donasi.validate');
 });
 
