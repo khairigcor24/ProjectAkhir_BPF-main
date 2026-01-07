@@ -39,7 +39,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/page/{page}', [PageController::class, 'index'])->name('page.index');
 
-Route::resource('user', UserController::class);
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('user', UserController::class);
+    Route::get('/admin/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
+});
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
