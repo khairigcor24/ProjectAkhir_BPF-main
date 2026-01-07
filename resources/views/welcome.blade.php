@@ -8,10 +8,33 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-7 col-md-8">
-                        <h1 class="text-center text-white">{{ __('SEJAHTERA') }}</h1>
-                        <h1 class="text-center text-white">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
+                        <h1 class="text-center text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">{{ __('SEJAHTERA') }}</h1>
+                        <h1 class="text-center text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
                     </div>
                 </div>
+                @if(isset($semua_bansos) && $semua_bansos->count() > 0)
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-10">
+                        <h2 class="text-center text-white mb-4">Program Bantuan Sosial Aktif</h2>
+                        <div class="row">
+                            @foreach($semua_bansos as $bansos)
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    @if($bansos->gambar)
+                                    <img src="{{ asset('storage/' . $bansos->gambar) }}" class="card-img-top" alt="{{ $bansos->nama_program }}">
+                                    @endif
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $bansos->nama_bantuan }}</h5>
+                                        <p class="card-text">{{ Str::limit($bansos->deskripsi, 100) }}</p>
+                                        <a href="{{ route('bansos.show', $bansos->id) }}" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

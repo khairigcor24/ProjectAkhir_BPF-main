@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\GuestDonasiController;
 use App\Models\Bansos;
 
 /*
@@ -21,6 +22,8 @@ Route::get('/', function () {
     $semua_bansos = Bansos::where('status', 'aktif')->get();
     return view('welcome', compact('semua_bansos'));
 });
+
+Route::get('/bansos/{id}', [BansosController::class, 'show'])->name('bansos.show');
 
 Route::get('/donasi', [GuestDonasiController::class, 'index'])->name('donasi.public');
 Route::get('/donasi/search', [GuestDonasiController::class, 'search'])->name('donasi.search');

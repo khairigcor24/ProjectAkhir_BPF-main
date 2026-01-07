@@ -1,59 +1,167 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Bantuan Sosial - SEJAHTERA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web berbasis Laravel untuk sistem bantuan sosial dengan Role-Based Access Control (RBAC) yang mencakup Admin, Staff, dan Guest.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Authentication & Authorization**: Login, register, dan RBAC dengan 3 role (Admin, Staff, Guest)
+- **Manajemen Donasi**: CRUD donasi dengan validasi oleh Staff/Admin
+- **Manajemen Bansos**: CRUD bantuan sosial dengan upload gambar
+- **Dashboard**: Dashboard berbeda untuk setiap role
+- **Laporan**: Laporan donasi untuk Admin dan Staff
+- **Public Access**: Halaman publik untuk Guest dengan search dan filter
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Persyaratan Sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- MySQL atau database lainnya yang didukung Laravel
+- Web server (Apache/Nginx) atau Laragon/XAMPP untuk lokal
 
-## Learning Laravel
+## Instalasi dan Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 1. Clone Repository
+```bash
+git clone <repository-url>
+cd ProjectAkhir_BPF-main
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Install Dependencies
+```bash
+composer install
+npm install
+```
 
-## Laravel Sponsors
+### 3. Environment Setup
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Edit file `.env` dan sesuaikan konfigurasi database:
+```env
+APP_NAME="SEJAHTERA"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-### Premium Partners
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sejahtera_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 4. Generate Application Key
+```bash
+php artisan key:generate
+```
 
-## Contributing
+### 5. Database Setup
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 6. Build Assets
+```bash
+npm run build
+# atau untuk development
+npm run dev
+```
 
-## Code of Conduct
+### 7. Jalankan Aplikasi
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Aplikasi akan berjalan di `http://localhost:8000`
 
-## Security Vulnerabilities
+## Akun Default
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Setelah seeding, akun berikut tersedia:
 
-## License
+- **Admin**: admin@sejahtera.com / password
+- **Staff**: staff@sejahtera.com / password
+- **Guest**: guest@sejahtera.com / password
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Deployment
+
+### Lokal (Laragon/XAMPP)
+1. Pastikan PHP, MySQL, dan web server terinstall
+2. Import database dari file SQL jika ada, atau jalankan migration
+3. Copy project ke folder web server
+4. Akses via browser
+
+### Online (Shared Hosting/VPS)
+1. Upload semua file ke hosting
+2. Setup database dan update `.env`
+3. Jalankan `composer install --no-dev --optimize-autoloader`
+4. Jalankan `php artisan migrate --seed`
+5. Build assets: `npm run build`
+6. Set permissions untuk storage dan bootstrap/cache
+7. Konfigurasi web server (Apache/Nginx) untuk point ke `public/index.php`
+
+### VPS Deployment Script (Linux/Unix)
+```bash
+# Install dependencies
+composer install --no-dev --optimize-autoloader
+
+# Setup environment
+cp .env.example .env
+# Edit .env sesuai kebutuhan
+
+# Generate key
+php artisan key:generate
+
+# Database
+php artisan migrate --seed
+
+# Build assets
+npm install
+npm run build
+
+# Optimize
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Set permissions
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+```
+
+### Windows Deployment (Laragon/XAMPP)
+Untuk pengguna Windows dengan Laragon/XAMPP:
+1. Copy project ke folder web server (misal: `C:\laragon\www\` untuk Laragon)
+2. Jalankan command di Command Prompt atau PowerShell:
+```cmd
+composer install
+copy .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+npm install
+npm run build
+php artisan serve
+```
+3. Akses aplikasi di browser sesuai konfigurasi web server
+
+## Struktur Database
+
+- **users**: Tabel user dengan role (admin, staff, guest)
+- **donasi**: Tabel donasi dengan relasi ke users (validator)
+- **bansos**: Tabel bantuan sosial
+- **migrations**: Default Laravel (cache, jobs)
+
+## Testing
+
+```bash
+php artisan test
+```
+
+## Lisensi
+
+MIT License
