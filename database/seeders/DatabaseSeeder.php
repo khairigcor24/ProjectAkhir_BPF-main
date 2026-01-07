@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UsersTableSeeder::class]);
+        // Seed Users first (Admin, Staff, Guest)
+        $this->call([RoleSeeder::class]);
+        
+        // Seed Program Bansos
+        $this->call([ProgramBansosSeeder::class]);
     }
 }
