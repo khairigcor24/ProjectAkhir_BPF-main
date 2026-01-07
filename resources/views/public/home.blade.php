@@ -1,0 +1,47 @@
+@extends('layouts.public')
+
+@section('content')
+<div class="full-page section-image"
+     data-color="black"
+     data-image="{{ asset('assets/img/Welcome/Bansos_1.jpeg') }}">
+
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-8">
+                    <h1 class="text-center text-white">SEJAHTERA</h1>
+                    <h3 class="text-center text-white">
+                        Hadir untuk membantu, dirancang untuk melayani.
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+
+            const images = [
+                '{{asset("assets/img/Welcome/Bansos_1.jpeg")}}',
+                '{{asset("assets/img/Welcome/Bansos_2.jpeg")}}',
+                '{{asset("assets/img/Welcome/Bansos_3.jpeg")}}',
+            ]
+
+            let i = 0;
+            setInterval(() => {
+                i = (i + 1) % images.length;
+                $('.full-page').css('background-image',
+                `url(${images[i]})`);
+            }, 4000); // Mengganti gambar selama 4 detik
+
+            setTimeout(function() {
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 700)
+        });
+    </script>
+@endpush
