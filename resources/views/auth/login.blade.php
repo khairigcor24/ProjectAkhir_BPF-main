@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts.public', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{ asset('assets/img/SenangBantu.jpeg') }}">

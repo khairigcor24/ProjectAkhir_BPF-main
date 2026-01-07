@@ -837,6 +837,11 @@
     color:#fff;
 }
 
+body.register-page {
+    padding-top: 70px;
+}
+
+
 .full-page {
     transition: opacity 1.2s ease-in-out;
 }

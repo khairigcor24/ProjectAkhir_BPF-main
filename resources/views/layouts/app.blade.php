@@ -33,7 +33,7 @@ SEJAHTERA - v2.0.1
     </head>
 
     <body>
-        <div class="wrapper @if (!auth()->check() || request()->route()->getName() == "") wrapper-full-page @endif">
+<div class="wrapper @if (request()->route()->getName() == 'login' || request()->route()->getName() == 'register') wrapper-full-page @endif">
 
             @if (auth()->check() && request()->route()->getName() != "")
                 @include('layouts.navbars.sidebar')

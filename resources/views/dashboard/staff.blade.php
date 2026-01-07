@@ -1,206 +1,100 @@
-{{-- Statistik Cards untuk Staff --}}
-<div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5 col-md-4">
-                        <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-badge text-warning"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-md-8">
-                        <div class="numbers">
-                            <p class="card-category">Pending</p>
-                            <p class="card-title">{{ $stats['penerima_pending'] }}</p>
-                        </div>
-                    </div>
+{{-- ================= STATISTIK DASHBOARD ================= --}}
+<style>
+    /* === UI POLISH === */
+    .stat-card, .hover-card {
+        transition: all .25s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 25px rgba(0,0,0,.08);
+    }
+    .hover-card:hover {
+        background: #f8f9fa;
+    }
+    .icon-big i {
+        font-size: 2.5rem;
+    }
+    </style>
+
+    <div class="row">
+    @php
+    $cards = [
+        ['title'=>'Pending','value'=>$stats['penerima_pending'],'icon'=>'nc-badge','color'=>'warning','desc'=>'Menunggu Verifikasi'],
+        ['title'=>'Diterima','value'=>$stats['penerima_diterima'],'icon'=>'nc-check-2','color'=>'success','desc'=>'Sudah Diverifikasi'],
+        ['title'=>'Dijadwalkan','value'=>$stats['penyaluran_dijadwalkan'],'icon'=>'nc-time-alarm','color'=>'info','desc'=>'Penyaluran Dijadwalkan'],
+        ['title'=>'Diproses','value'=>$stats['penyaluran_diproses'],'icon'=>'nc-delivery-fast','color'=>'primary','desc'=>'Sedang Diproses'],
+    ];
+    @endphp
+
+    @foreach($cards as $card)
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card stat-card shadow-sm">
+            <div class="card-body d-flex align-items-center">
+                <div class="icon-big text-{{ $card['color'] }} mr-3">
+                    <i class="nc-icon {{ $card['icon'] }}"></i>
+                </div>
+                <div>
+                    <p class="mb-1 text-muted small">{{ $card['title'] }}</p>
+                    <h4 class="font-weight-bold counter" data-count="{{ $card['value'] }}">0</h4>
                 </div>
             </div>
-            <div class="card-footer">
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-clock-o"></i> Menunggu Verifikasi
-                </div>
+            <div class="card-footer bg-transparent border-0 pt-0">
+                <small class="text-muted">{{ $card['desc'] }}</small>
             </div>
         </div>
     </div>
-
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5 col-md-4">
-                        <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-check-2 text-success"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-md-8">
-                        <div class="numbers">
-                            <p class="card-category">Diterima</p>
-                            <p class="card-title">{{ $stats['penerima_diterima'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-check-circle"></i> Sudah Diverifikasi
-                </div>
-            </div>
-        </div>
+    @endforeach
     </div>
 
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5 col-md-4">
-                        <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-time-alarm text-info"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-md-8">
-                        <div class="numbers">
-                            <p class="card-category">Dijadwalkan</p>
-                            <p class="card-title">{{ $stats['penyaluran_dijadwalkan'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-calendar"></i> Penyaluran Dijadwalkan
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5 col-md-4">
-                        <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-delivery-fast text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-md-8">
-                        <div class="numbers">
-                            <p class="card-category">Diproses</p>
-                            <p class="card-title">{{ $stats['penyaluran_diproses'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-spinner"></i> Sedang Diproses
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- Penerima Pending (Card View) --}}
-<div class="row">
+    {{-- ================= PENERIMA PENDING ================= --}}
+    <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Penerima Bansos Menunggu Verifikasi</h4>
-                <p class="card-category">Verifikasi pendaftaran penerima bansos</p>
-            </div>
-            <div class="card-body">
-                @forelse($penerimaPending as $penerima)
-                <div class="card" style="margin-bottom: 15px;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h5 class="card-title">{{ $penerima->nama_lengkap }}</h5>
-                                <p class="card-text">
-                                    <strong>NIK:</strong> {{ $penerima->nik }}<br>
-                                    <strong>Program:</strong> {{ $penerima->programBansos->nama_program }}<br>
-                                    <strong>Alamat:</strong> {{ $penerima->alamat }}
-                                </p>
-                                <small class="text-muted">
-                                    <i class="fa fa-calendar"></i> Didaftarkan: {{ $penerima->created_at->format('d/m/Y H:i') }}
-                                </small>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <span class="badge badge-warning badge-lg">Menunggu Verifikasi</span>
-                                <div class="mt-3">
-                                    <a href="{{ route('penerima-bansos.show', $penerima) }}" class="btn btn-info btn-sm">
-                                        <i class="fa fa-eye"></i> Lihat Detail
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <div class="alert alert-info">
-                    <i class="fa fa-info-circle"></i> Tidak ada penerima bansos yang menunggu verifikasi.
-                </div>
-                @endforelse
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('penerima-bansos.index') }}" class="btn btn-primary">Lihat Semua Penerima</a>
-            </div>
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h4 class="card-title">Penerima Menunggu Verifikasi</h4>
+            <p class="card-category">Validasi pendaftaran bansos</p>
         </div>
-    </div>
-</div>
 
-{{-- Penyaluran Pending (Card View) --}}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Penyaluran Bansos yang Perlu Diproses</h4>
-                <p class="card-category">Penyaluran yang perlu ditindaklanjuti</p>
-            </div>
-            <div class="card-body">
-                @forelse($penyaluranPending as $penyaluran)
-                <div class="card" style="margin-bottom: 15px;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h5 class="card-title">{{ $penyaluran->penerimaBansos->nama_lengkap }}</h5>
-                                <p class="card-text">
-                                    <strong>Program:</strong> {{ $penyaluran->programBansos->nama_program }}<br>
-                                    <strong>Nominal:</strong> Rp {{ number_format($penyaluran->nominal_diterima, 0, ',', '.') }}<br>
-                                    <strong>Metode:</strong> {{ ucfirst($penyaluran->metode_penyaluran) }}
-                                </p>
-                                <small class="text-muted">
-                                    <i class="fa fa-calendar"></i> Tanggal: {{ $penyaluran->tanggal_penyaluran->format('d/m/Y') }}
-                                </small>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                @if($penyaluran->status == 'dijadwalkan')
-                                    <span class="badge badge-info badge-lg">Dijadwalkan</span>
-                                @elseif($penyaluran->status == 'diproses')
-                                    <span class="badge badge-warning badge-lg">Diproses</span>
-                                @endif
-                                <div class="mt-3">
-                                    <a href="{{ route('penyaluran-bansos.show', $penyaluran) }}" class="btn btn-info btn-sm">
-                                        <i class="fa fa-eye"></i> Lihat Detail
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+        <div class="card-body">
+            @forelse($penerimaPending as $penerima)
+            <div class="card mb-3 hover-card shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 font-weight-bold">{{ $penerima->nama_lengkap }}</h6>
+                        <small class="text-muted">
+                            {{ $penerima->programBansos->nama_program }} • {{ $penerima->nik }}
+                        </small>
+                        <br>
+                        <small class="text-muted">
+                            <i class="fa fa-calendar"></i>
+                            {{ $penerima->created_at->format('d/m/Y H:i') }}
+                        </small>
+                    </div>
+                    <div class="text-right">
+                        <span class="badge badge-warning mb-2">Menunggu</span><br>
+                        <a href="{{ route('penerima-bansos.show', $penerima) }}" class="btn btn-sm btn-outline-info">
+                            <i class="fa fa-eye"></i> Detail
+                        </a>
                     </div>
                 </div>
-                @empty
-                <div class="alert alert-info">
-                    <i class="fa fa-info-circle"></i> Tidak ada penyaluran yang perlu diproses.
-                </div>
-                @endforelse
             </div>
-            <div class="card-footer">
-                <a href="{{ route('penyaluran-bansos.index') }}" class="btn btn-primary">Lihat Semua Penyaluran</a>
+            @empty
+            <div class="alert alert-info">
+                <i class="fa fa-info-circle"></i> Tidak ada penerima pending.
             </div>
+            @endforelse
+        </div>
+
+        <div class="card-footer">
+            <a href="{{ route('penerima-bansos.index') }}" class="btn btn-primary btn-sm">
+                Lihat Semua
+            </a>
         </div>
     </div>
-</div>
+    </div>
+    </div>
+
+    {{-- ================= PENYALURAN ================= --}}
+    <div class="row">
+    <div class="col-md-12">
+    <div

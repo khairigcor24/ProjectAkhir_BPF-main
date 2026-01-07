@@ -1,11 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-transparent fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand text-white" href="/">
-            SEJAHTERA
-        </a>
+        <a class="navbar-brand" href="/">SEJAHTERA</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#publicNavbar">
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#publicNavbar"
+                aria-controls="publicNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -13,22 +15,16 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/">
-                        Home
-                    </a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/donasi">
-                        Info Bansos
-                    </a>
+                    <a class="nav-link" href="/donasi">Info Bansos</a>
                 </li>
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('login') }}">
-                            Login
-                        </a>
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
 
                     <li class="nav-item">
@@ -41,9 +37,7 @@
 
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('dashboard') }}">
-                            Dashboard
-                        </a>
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                 @endauth
 

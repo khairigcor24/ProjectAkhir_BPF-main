@@ -86,4 +86,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Donasi::class, 'user_id');
     }
+
+    public function hasRole($role) : bool
+    {
+        return $this->role === $role;
+    }
 }
