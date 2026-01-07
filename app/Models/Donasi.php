@@ -62,3 +62,6 @@ class Donasi extends Model
         return $query->where('jenis_donasi', $jenis);
     }
 }
+
+
+
