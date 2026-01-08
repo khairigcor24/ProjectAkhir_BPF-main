@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'icons', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Icons', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'icons', 'title' => 'SEJAHTERA', 'navName' => 'Icons', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
