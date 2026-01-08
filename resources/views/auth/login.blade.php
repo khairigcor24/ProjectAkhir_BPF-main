@@ -1,15 +1,15 @@
-@extends('layouts.public', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts.public', ['activePage' => 'login', 'title' => 'SEJAHTERA'])
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{ asset('assets/img/SenangBantu.jpeg') }}">
-        <div class="content pt-5">
+        <div class="pt-5 content">
             <div class="container mt-5">
-                <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+                <div class="ml-auto mr-auto col-md-4 col-sm-6">
                     <form class="form" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="card card-login card-hidden">
                             <div class="card-header ">
-                                <h3 class="header text-center">{{ __('Login') }}</h3>
+                                <h3 class="text-center header">{{ __('Login') }}</h3>
                             </div>
                             <div class="card-body ">
                                 <div class="card-body">
@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer ml-auto mr-auto">
+                                <div class="ml-auto mr-auto card-footer">
                                     <div class="container text-center" >
                                         <button type="submit" class="btn btn-warning btn-wd">{{ __('Login') }}</button>
                                     </div>

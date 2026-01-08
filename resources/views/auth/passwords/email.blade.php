@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts.app', ['activePage' => 'login', 'title' => 'SEJAHTERA'])
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{asset('assets/img/full-screen-image-2.jpg')}}">
@@ -28,17 +28,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row mb-0 d-flex justify-content-center">
+                                    <div class="mb-0 form-group row d-flex justify-content-center">
                                         <div class="offset-md-4">
                                             <button type="submit" class="btn btn-warning btn-wd">
                                                 {{ __('Send Password Reset Link') }}
                                             </button>
                                         </div>
                                     </div>
-                    
+
                                 </div>
                             </div>
-                        </form>  
+                        </form>
                     </div>
                 </div>
             </div>

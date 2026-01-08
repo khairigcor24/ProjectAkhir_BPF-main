@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'notifications', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Notifications', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'notifications', 'title' => 'SEJAHTERA', 'navName' => 'Notifications', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -86,7 +86,7 @@
                     <br>
                     <div class="places-buttons">
                         <div class="row">
-                            <div class="col-md-6 offset-md-3 text-center">
+                            <div class="text-center col-md-6 offset-md-3">
                                 <h4 class="card-title">Notifications Places
                                     <p class="card-category">
                                         <small>Click to view notifications</small>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-center">
+                        <div class="text-center col-md-12">
                             <h4 class="title">Modal</h4>
                             <a class="btn btn-info btn-fill btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
                                 Launch Modal Mini
@@ -136,7 +136,7 @@
                                 <i class="nc-icon nc-bulb-63"></i>
                             </div>
                         </div>
-                        <div class="modal-body text-center">
+                        <div class="text-center modal-body">
                             <p>Always have an access to your profile</p>
                         </div>
                         <div class="modal-footer">
