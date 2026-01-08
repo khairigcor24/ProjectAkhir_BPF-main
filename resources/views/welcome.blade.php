@@ -122,7 +122,6 @@
                         <h1 class="text-center text-white">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
                     </div>
                 </div>
-                @endif
             </div>
         </div>
     </div>
