@@ -28,6 +28,7 @@ SEJAHTERA - v2.0.1
         <!-- CSS Files -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/light-bootstrap-dashboard.css?v=2.0.0') }} " rel="stylesheet" />
+
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />
     </head>
 
