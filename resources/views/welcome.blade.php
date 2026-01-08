@@ -113,36 +113,16 @@
 
 <div class="full-page section-image"
      data-color="black"
-     data-image="{{asset('assets/img/Welcome/Bansos_1.jpeg')}}"
-     style="background-image: url('{{asset('assets/img/Welcome/Bansos_1.jpeg')}}'); padding-top: 80px;">
-
-    <div class="welcome-content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 col-md-12">
-                    <h1 class="welcome-title">SEJAHTERA</h1>
-                    <p class="welcome-subtitle">
-                        Hadir untuk membantu,<br>
-                        dirancang untuk melayani.
-                    </p>
-                    <div class="mt-4">
-                        @guest
-                            <a href="{{ route('register') }}" class="btn welcome-btn mr-3">
-                                <i class="fa fa-user-plus"></i> Daftar Sekarang
-                            </a>
-                            <a href="{{ route('login') }}" class="btn welcome-btn welcome-btn-secondary">
-                                <i class="fa fa-sign-in"></i> Masuk
-                            </a>
-                        @else
-                            <a href="{{ route('dashboard') }}" class="btn welcome-btn mr-3">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </a>
-                            <a href="/guest/donasi/search" class="btn welcome-btn welcome-btn-secondary">
-                                <i class="fa fa-search"></i> Cari Bansos
-                            </a>
-                        @endguest
+      data-image="{{asset('assets/img/Welcome/Bansos_1.jpeg')}}">
+        <div class="content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-md-8">
+                        <h1 class="text-center text-white">{{ __('SEJAHTERA') }}</h1>
+                        <h1 class="text-center text-white">{{ __('Hadir untuk membantu, dirancang untuk melayani.') }}</h1>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

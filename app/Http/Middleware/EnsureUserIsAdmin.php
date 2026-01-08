@@ -30,14 +30,15 @@ class EnsureUserIsAdmin
         }
 
         // Cek apakah user memiliki role admin
-        // Pastikan kolom role ada dan nilainya adalah 'admin'
-        if (!$user->role || $user->role !== 'admin') {
-            abort(403, 'Unauthorized. Hanya Admin yang dapat mengakses halaman ini. Role saat ini: ' . ($user->role ?? 'null'));
+        if (!$user->isAdmin()) {
+            abort(403, 'Unauthorized. Hanya Admin yang dapat mengakses halaman ini.');
         }
 
         return $next($request);
     }
 }
+
+
 
 
 

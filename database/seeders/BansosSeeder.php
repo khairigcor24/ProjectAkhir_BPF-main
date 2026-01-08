@@ -12,7 +12,7 @@ class BansosSeeder extends Seeder
      */
     public function run(): void
     {
-    \App\Models\InfoBansos::create([
+    \App\Models\Bansos::create([
     'nama_bantuan' => 'Bantuan Langsung Tunai (BLT)',
     'deskripsi' => 'Bantuan uang tunai untuk keluarga terdampak ekonomi.',
     'kuota' => 100,
