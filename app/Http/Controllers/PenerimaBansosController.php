@@ -7,6 +7,8 @@ use App\Models\ProgramBansos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class PenerimaBansosController extends Controller
 {
@@ -17,7 +19,7 @@ class PenerimaBansosController extends Controller
     {
         Gate::authorize('is-admin-or-staff');
 
-        $user = auth()->user();
+        $user = Auth::user();
         $query = PenerimaBansos::with(['programBansos', 'verifier'])->latest();
 
         // Search
@@ -39,9 +41,9 @@ class PenerimaBansosController extends Controller
         $programBansos = ProgramBansos::where('status', 'aktif')->get();
 
         // Admin melihat dengan Table, Staff melihat dengan Card/List
-        if ($user->isAdmin()) {
+        if ($user->role === 'admin') {
             return view('penerima-bansos.admin.index', compact('penerimaBansos', 'programBansos'));
-        } elseif ($user->isStaff()) {
+        } elseif ($user->role === 'staff') {
             return view('penerima-bansos.staff.index', compact('penerimaBansos', 'programBansos'));
         }
 
@@ -55,12 +57,12 @@ class PenerimaBansosController extends Controller
     {
         // Admin dan Guest bisa membuat pendaftaran
         $programBansos = ProgramBansos::where('status', 'aktif')->get();
-        
-        if (auth()->check() && auth()->user()->isAdmin()) {
+
+        if (Auth::check() && Auth::user()->role === 'admin') {
             Gate::authorize('is-admin');
             return view('penerima-bansos.create', compact('programBansos'));
         }
-        
+
         // Guest dapat membuat pendaftaran
         return view('penerima-bansos.create', compact('programBansos'));
     }
@@ -103,12 +105,12 @@ class PenerimaBansosController extends Controller
             $validated['dokumen_pendukung'] = $dokumenPaths;
         }
 
-        $validated['created_by'] = auth()->id() ?? null;
+        $validated['created_by'] = Auth::id() ?? null;
         $validated['status_verifikasi'] = 'pending';
 
         PenerimaBansos::create($validated);
 
-        $redirectRoute = auth()->check() && auth()->user()->isAdmin() 
+        $redirectRoute = Auth::check() && Auth::user()->role === 'admin'
             ? route('penerima-bansos.index')
             : route('guest.penerima-bansos.success');
 
@@ -122,9 +124,9 @@ class PenerimaBansosController extends Controller
     public function show(PenerimaBansos $penerimaBansos)
     {
         Gate::authorize('is-admin-or-staff');
-        
+
         $penerimaBansos->load(['programBansos', 'verifier', 'creator', 'penyaluran']);
-        
+
         return view('penerima-bansos.show', compact('penerimaBansos'));
     }
 
@@ -134,9 +136,9 @@ class PenerimaBansosController extends Controller
     public function edit(PenerimaBansos $penerimaBansos)
     {
         Gate::authorize('is-admin');
-        
+
         $programBansos = ProgramBansos::all();
-        
+
         return view('penerima-bansos.edit', compact('penerimaBansos', 'programBansos'));
     }
 
@@ -211,7 +213,7 @@ class PenerimaBansosController extends Controller
     /**
      * Validasi penerima bansos (Admin dan Staff bisa validasi)
      */
-    public function verify(Request $request, PenerimaBansos $penerimaBansos)
+    public function verifikasi(Request $request, PenerimaBansos $penerimaBansos)
     {
         Gate::authorize('is-admin-or-staff');
 
@@ -223,7 +225,7 @@ class PenerimaBansosController extends Controller
         $penerimaBansos->update([
             'status_verifikasi' => $validated['status_verifikasi'],
             'catatan_verifikasi' => $validated['catatan_verifikasi'] ?? null,
-            'verified_by' => auth()->id(),
+            'verified_by' => Auth::id(),
             'tanggal_verifikasi' => now(),
         ]);
 

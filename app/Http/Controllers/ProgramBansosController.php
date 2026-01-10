@@ -6,6 +6,7 @@ use App\Models\ProgramBansos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramBansosController extends Controller
 {
@@ -36,13 +37,14 @@ class ProgramBansosController extends Controller
         return view('program-bansos.index', compact('programBansos'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         Gate::authorize('is-admin');
-        
+
         return view('program-bansos.create');
     }
 
@@ -71,7 +73,7 @@ class ProgramBansosController extends Controller
             $validated['gambar'] = $gambarPath;
         }
 
-        $validated['created_by'] = auth()->id();
+        $validated['created_by'] = Auth::id();
 
         ProgramBansos::create($validated);
 
@@ -85,9 +87,9 @@ class ProgramBansosController extends Controller
     public function show(ProgramBansos $programBansos)
     {
         Gate::authorize('is-admin-or-staff');
-        
+
         $programBansos->load(['creator', 'penerima', 'penyaluran']);
-        
+
         return view('program-bansos.show', compact('programBansos'));
     }
 
@@ -97,7 +99,7 @@ class ProgramBansosController extends Controller
     public function edit(ProgramBansos $programBansos)
     {
         Gate::authorize('is-admin');
-        
+
         return view('program-bansos.edit', compact('programBansos'));
     }
 
@@ -125,7 +127,7 @@ class ProgramBansosController extends Controller
             if ($programBansos->gambar) {
                 Storage::disk('public')->delete($programBansos->gambar);
             }
-            
+
             $gambar = $request->file('gambar');
             $gambarPath = $gambar->store('program-bansos', 'public');
             $validated['gambar'] = $gambarPath;

@@ -40,22 +40,22 @@ class AuthServiceProvider extends ServiceProvider
 
         // Gate untuk menghapus donasi (hanya Admin)
         Gate::define('delete-donasi', function (User $user) {
-            return $user->isAdmin();
+            return $user->role === 'admin';
         });
 
         // Gate untuk mengubah konfigurasi (hanya Admin)
         Gate::define('manage-config', function (User $user) {
-            return $user->isAdmin();
+            return $user->role === 'admin';
         });
 
         // Gate untuk memvalidasi donasi (Admin dan Staff)
         Gate::define('validate-donasi', function (User $user) {
-            return $user->isAdminOrStaff();
+            return $user->role === 'admin' || $user->role === 'staff';
         });
 
         // Gate untuk melihat laporan (Admin dan Staff)
         Gate::define('view-report', function (User $user) {
-            return $user->isAdminOrStaff();
+            return $user->role === 'admin' || $user->role === 'staff';
         });
     }
 }

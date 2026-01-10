@@ -12,7 +12,7 @@
                                 <h4 class="card-title">{{ $penerimaBansos->nama_lengkap }}</h4>
                                 <p class="card-category">Detail Data Penerima Bansos</p>
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="text-right col-4">
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('penerima-bansos.edit', $penerimaBansos) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
@@ -123,7 +123,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
+                        <div class="mt-3 row">
                             <div class="col-md-12">
                                 <h5 class="mb-3">Informasi Ekonomi</h5>
                                 <table class="table table-bordered">
@@ -154,15 +154,15 @@
                         </div>
 
                         @if($penerimaBansos->dokumen_pendukung && count($penerimaBansos->dokumen_pendukung) > 0)
-                        <div class="row mt-3">
+                        <div class="mt-3 row">
                             <div class="col-md-12">
                                 <h5 class="mb-3">Dokumen Pendukung</h5>
                                 <div class="row">
                                     @foreach($penerimaBansos->dokumen_pendukung as $dokumen)
-                                        <div class="col-md-3 mb-3">
+                                        <div class="mb-3 col-md-3">
                                             <div class="card">
-                                                <div class="card-body text-center">
-                                                    <i class="fa fa-file-pdf fa-3x text-danger mb-2"></i>
+                                                <div class="text-center card-body">
+                                                    <i class="mb-2 fa fa-file-pdf fa-3x text-danger"></i>
                                                     <p class="small">{{ basename($dokumen) }}</p>
                                                     <a href="{{ asset('storage/' . $dokumen) }}" target="_blank" class="btn btn-sm btn-info">
                                                         <i class="fa fa-download"></i> Download
@@ -177,14 +177,14 @@
                         @endif
 
                         @if(auth()->user()->isAdminOrStaff() && $penerimaBansos->status_verifikasi == 'pending')
-                        <div class="row mt-4">
+                        <div class="mt-4 row">
                             <div class="col-md-12">
                                 <div class="card bg-light">
                                     <div class="card-header">
                                         <h5>Verifikasi Penerima</h5>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('penerima-bansos.verify', $penerimaBansos) }}" method="POST">
+                                        <form action="{{ route('penerima-bansos.verifikasi', $penerimaBansos->id) }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -11,9 +12,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        if ($user->isAdmin()) {
+        if ($user && $user->role === 'admin') {
             // Statistik untuk Admin
             $stats = [
                 'total_program' => \App\Models\ProgramBansos::count(),
@@ -26,15 +27,15 @@ class DashboardController extends Controller
                 'total_donasi' => \App\Models\Donasi::count(),
                 'total_nominal_donasi' => \App\Models\Donasi::where('jenis_donasi', 'uang')->where('status', 'diterima')->sum('jumlah'),
             ];
-            
+
             // Data terbaru
             $programTerbaru = \App\Models\ProgramBansos::latest()->take(5)->get();
             $penerimaTerbaru = \App\Models\PenerimaBansos::with('programBansos')->latest()->take(5)->get();
-            
+
             return view('dashboard.admin', compact('stats', 'programTerbaru', 'penerimaTerbaru'));
-        } 
-        
-        if ($user->isStaff()) {
+        }
+
+        if ($user && $user->role === 'staff') {
             // Statistik untuk Staff
             $stats = [
                 'penerima_pending' => \App\Models\PenerimaBansos::where('status_verifikasi', 'pending')->count(),
@@ -42,16 +43,16 @@ class DashboardController extends Controller
                 'penyaluran_dijadwalkan' => \App\Models\PenyaluranBansos::where('status', 'dijadwalkan')->count(),
                 'penyaluran_diproses' => \App\Models\PenyaluranBansos::where('status', 'diproses')->count(),
             ];
-            
+
             // Data untuk staff
             $penerimaPending = \App\Models\PenerimaBansos::with('programBansos')->where('status_verifikasi', 'pending')->latest()->take(10)->get();
             $penyaluranPending = \App\Models\PenyaluranBansos::with(['penerimaBansos', 'programBansos'])
                 ->whereIn('status', ['dijadwalkan', 'diproses'])
                 ->latest()->take(10)->get();
-            
+
             return view('dashboard.staff', compact('stats', 'penerimaPending', 'penyaluranPending'));
         }
-        
+
         // Guest dashboard
         $programAktif = \App\Models\ProgramBansos::where('status', 'aktif')->latest()->take(6)->get();
         return view('dashboard.guest', compact('programAktif'));

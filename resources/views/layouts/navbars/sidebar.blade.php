@@ -71,13 +71,13 @@
     @endif
 
     {{-- USER / WARGA --}}
-    @role('user')
+    @if(auth()->check() && auth()->user()->role === 'user')
         <li>
-            <a href="{{ route('donasi.public') }}">
+            <a href="{{ route('donasi.user') }}">
                 <i class="nc-icon nc-paper-2"></i>
                 <p>Ajukan Bantuan</p>
             </a>
         </li>
-    @endrole
+    @endif
 
 </ul>

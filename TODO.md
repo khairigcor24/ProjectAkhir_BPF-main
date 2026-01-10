@@ -1,17 +1,11 @@
-# Admin Role Implementation TODO
+# TODO: Improve Staff Dashboard Verification Status Cards
 
-## Completed
-- [x] Create admin dashboard view (resources/views/admin/dashboard.blade.php)
-- [x] Add admin dashboard route protected by 'admin' middleware
-- [x] Protect user management routes with 'admin' middleware
-- [x] Add role field to user create form
-- [x] Add role field to user edit form
-- [x] Update UserController to handle role in store and update methods
-- [x] Update UserRequest validation to include role
+## Tasks
+- [x] Enhance card design with better styling, colors, and layout for visual appeal
+- [x] Add interactive elements like hover effects and animations
+- [x] Add images/icons to represent verification statuses (pending, diterima, ditolak)
+- [x] Ensure "ditolak" and "diterima" statuses are properly displayed and updated
+- [x] Test the changes to verify functionality
 
-## Pending
-- [ ] Test admin login and access
-- [ ] Verify all admin privileges work
-- [ ] Add any missing features like categories/config if needed
-- [ ] Update sidebar/navigation to include admin dashboard link
-- [ ] Ensure reports functionality is accessible to admin
+## Files to Edit
+- resources/views/penerima-bansos/staff/index.blade.php

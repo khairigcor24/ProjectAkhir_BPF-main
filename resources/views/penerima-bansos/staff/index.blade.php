@@ -1,5 +1,47 @@
 @extends('layouts.app', ['activePage' => 'penerima-bansos', 'title' => 'Penerima Bansos', 'navName' => 'Penerima Bansos', 'activeButton' => 'laravel'])
 
+@push('css')
+<style>
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+.status-icon {
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.avatar-circle {
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover .avatar-circle {
+    background-color: #e3f2fd !important;
+    transform: scale(1.1);
+}
+
+.card-footer .btn {
+    transition: all 0.3s ease;
+}
+
+.card-footer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+</style>
+@endpush
+
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -10,7 +52,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Penerima Bansos</h3>
-                                <p class="text-sm mb-0">Verifikasi dan kelola penerima bansos</p>
+                                <p class="mb-0 text-sm">Verifikasi dan kelola penerima bansos</p>
                             </div>
                         </div>
                     </div>
@@ -60,48 +102,79 @@
                         {{-- Card View --}}
                         <div class="row">
                             @forelse($penerimaBansos as $penerima)
-                                <div class="col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-header">
+                                <div class="mb-4 col-md-6">
+                                    <div class="border-0 shadow-lg card hover-card" style="transition: all 0.3s ease; border-radius: 15px; overflow: hidden;">
+                                        <div class="text-white card-header bg-gradient-primary" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
                                             <div class="row align-items-center">
                                                 <div class="col-8">
-                                                    <h5 class="mb-0">{{ $penerima->nama_lengkap }}</h5>
-                                                    <small class="text-muted">NIK: {{ $penerima->nik }}</small>
+                                                    <h5 class="mb-0 font-weight-bold">{{ $penerima->nama_lengkap }}</h5>
+                                                    <small class="opacity-75">NIK: {{ $penerima->nik }}</small>
                                                 </div>
-                                                <div class="col-4 text-right">
+                                                <div class="text-right col-4">
                                                     @if($penerima->status_verifikasi == 'pending')
-                                                        <span class="badge badge-warning badge-lg">Pending</span>
+                                                        <div class="status-icon">
+                                                            <i class="fas fa-clock fa-2x text-warning"></i>
+                                                            <span class="mt-1 badge badge-warning badge-pill">Pending</span>
+                                                        </div>
                                                     @elseif($penerima->status_verifikasi == 'diterima')
-                                                        <span class="badge badge-success badge-lg">Diterima</span>
+                                                        <div class="status-icon">
+                                                            <i class="fas fa-check-circle fa-2x text-success"></i>
+                                                            <span class="mt-1 badge badge-success badge-pill">Diterima</span>
+                                                        </div>
                                                     @else
-                                                        <span class="badge badge-danger badge-lg">Ditolak</span>
+                                                        <div class="status-icon">
+                                                            <i class="fas fa-times-circle fa-2x text-danger"></i>
+                                                            <span class="mt-1 badge badge-danger badge-pill">Ditolak</span>
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <p><strong>Program:</strong> {{ $penerima->programBansos->nama_program }}</p>
-                                            <p><strong>Alamat:</strong> {{ $penerima->alamat }}</p>
-                                            <p><strong>Telepon:</strong> {{ $penerima->telepon ?? '-' }}</p>
-                                            @if($penerima->dokumen_pendukung)
-                                                <p>
-                                                    <strong>Dokumen:</strong> 
-                                                    <span class="badge badge-info">{{ count($penerima->dokumen_pendukung) }} file</span>
-                                                </p>
-                                            @endif
-                                            <p class="text-muted small">
-                                                <i class="fa fa-calendar"></i> Didaftarkan: {{ $penerima->created_at->format('d/m/Y H:i') }}
+                                            <div class="row">
+                                                <div class="text-center col-3">
+                                                    <div class="avatar-circle bg-light" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                                        <i class="fas fa-user fa-2x text-primary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">
+                                                    <p class="mb-1"><strong class="text-primary">Program:</strong> {{ $penerima->programBansos->nama_program }}</p>
+                                                    <p class="mb-1"><strong class="text-primary">Alamat:</strong> {{ Str::limit($penerima->alamat, 30) }}</p>
+                                                    <p class="mb-1"><strong class="text-primary">Telepon:</strong> {{ $penerima->telepon ?? '-' }}</p>
+                                                    @if($penerima->dokumen_pendukung)
+                                                        <p class="mb-1">
+                                                            <strong class="text-primary">Dokumen:</strong>
+                                                            <span class="badge badge-info badge-pill">{{ count($penerima->dokumen_pendukung) }} file</span>
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <hr class="my-2">
+                                            <p class="mb-0 text-muted small">
+                                                <i class="fas fa-calendar-alt text-muted"></i> Didaftarkan: {{ $penerima->created_at->format('d/m/Y H:i') }}
                                             </p>
                                         </div>
-                                        <div class="card-footer">
-                                            <a href="{{ route('penerima-bansos.show', $penerima) }}" class="btn btn-info btn-sm">
-                                                <i class="fa fa-eye"></i> Lihat Detail
-                                            </a>
-                                            @if($penerima->status_verifikasi == 'pending')
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#verifyModal{{ $penerima->id }}">
-                                                    <i class="fa fa-check"></i> Verifikasi
-                                                </button>
-                                            @endif
+                                        <div class="border-0 card-footer bg-light">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <a href="{{ route('penerima-bansos.show', $penerima) }}" class="btn btn-outline-info btn-sm btn-block">
+                                                        <i class="fas fa-eye"></i> Lihat Detail
+                                                    </a>
+                                                </div>
+                                                @if($penerima->status_verifikasi == 'pending')
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#verifyModal{{ $penerima->id }}">
+                                                            <i class="fas fa-check"></i> Verifikasi
+                                                        </button>
+                                                    </div>
+                                                @else
+                                                    <div class="col-6">
+                                                        <span class="text-muted small">
+                                                            <i class="fas fa-check-double"></i> Sudah diverifikasi
+                                                        </span>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +184,8 @@
                                 <div class="modal fade" id="verifyModal{{ $penerima->id }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form action="{{ route('penerima-bansos.verify', $penerima) }}" method="POST">
+                                            <form method="POST"
+                                                action="{{ route('penerima-bansos.verifikasi', $penerima->id) }}">
                                                 @csrf
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Verifikasi Penerima Bansos</h5>
