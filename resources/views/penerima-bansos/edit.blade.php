@@ -178,14 +178,21 @@
                                     <label class="form-control-label">Dokumen Saat Ini:</label>
                                     <div class="row">
                                         @foreach($penerimaBansos->dokumen_pendukung as $index => $dokumen)
-                                            <div class="col-md-3 mb-2">
+                                            <div class="mb-2 col-md-3">
                                                 <div class="card">
-                                                    <div class="card-body p-2 text-center">
+                                                    <div class="p-2 text-center card-body">
                                                         <i class="fa fa-file-pdf fa-2x text-danger"></i>
-                                                        <p class="small mb-1">{{ basename($dokumen) }}</p>
-                                                        <a href="{{ asset('storage/' . $dokumen) }}" target="_blank" class="btn btn-xs btn-info">
-                                                            <i class="fa fa-eye"></i>
+                                                        <p class="mb-1 small">{{ basename($dokumen) }}</p>
+
+                                                        @foreach ($penerimaBansos->dokumen_pendukung as $dokumen)
+                                                        <a href="{{ route('penerima-bansos.download',
+                                                        [$penerimaBansos->id, basename($dokumen)]) }}"
+                                                        target="_blank"
+                                                        class="btn btn-sm btn-outline-primary"
+                                                        title="Lihat Dokumen">
+                                                        <i class="fa fa-eye"></i>
                                                         </a>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>

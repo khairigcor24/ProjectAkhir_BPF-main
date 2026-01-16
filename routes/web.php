@@ -158,11 +158,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // PENERIMA BANSOS - ADMIN OR STAFF ROUTES
 // ============================================
 Route::middleware(['auth', 'adminOrStaff'])->group(function () {
-    Route::get('penerima-bansos', [App\Http\Controllers\PenerimaBansosController::class, 'index'])->name('penerima-bansos.index');
-    Route::get('penerima-bansos/{penerimaBansos}', [App\Http\Controllers\PenerimaBansosController::class, 'show'])->name('penerima-bansos.show');
+    Route::get('penerima-bansos', [PenerimaBansosController::class, 'index'])->name('penerima-bansos.index');
+    Route::get('penerima-bansos/{penerimaBansos}', [PenerimaBansosController::class, 'show'])->name('penerima-bansos.show');
     Route::post('penerima-bansos/{penerima}/verifikasi',
         [PenerimaBansosController::class, 'verifikasi'])
     ->name('penerima-bansos.verifikasi');
+    Route::get('penerima-bansos/{penerimaBansos}/download/{filename}',
+        [PenerimaBansosController::class, 'downloadDokumen'])
+        ->name('penerima-bansos.download');
 });
 
 // ============================================
