@@ -50,35 +50,33 @@
                             </div>
                         </form>
 
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Program</th>
-                                        <th>Kuota</th>
-                                        <th>Nominal</th>
-                                        <th>Status</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th class="text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($programBansos as $index => $program)
-                                        <tr>
-                                            <td>{{ $programBansos->firstItem() + $index }}</td>
-                                            <td>
-                                                <strong>{{ $program->nama_program }}</strong>
-                                                @if($program->gambar)
-                                                    <i class="fa fa-image text-info ml-2" title="Memiliki gambar"></i>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                {{ $program->kuota }}
-                                                <small class="text-muted">(Tersisa: {{ $program->kuota_tersisa }})</small>
-                                            </td>
-                                            <td>Rp {{ number_format($program->nominal_bantuan ?? 0, 0, ',', '.') }}</td>
-                                            <td>
+                        {{-- Program Cards Grid View --}}
+                        @forelse($programBansos as $program)
+                            @if($loop->first)
+                                <div class="row">
+                            @endif
+
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100 shadow-sm hover-shadow transition" style="cursor: pointer; transition: all 0.3s ease;">
+                                    {{-- Program Image --}}
+                                    @if($program->gambar)
+                                        <img src="{{ asset('storage/' . $program->gambar) }}" alt="{{ $program->nama_program }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                            <i class="fa fa-image fa-3x text-muted"></i>
+                                        </div>
+                                    @endif
+
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">{{ $program->nama_program }}</h5>
+                                        
+                                        <p class="card-text text-muted small flex-grow-1">
+                                            {{ Str::limit($program->deskripsi, 100, '...') }}
+                                        </p>
+
+                                        <div class="mb-3">
+                                            {{-- Status Badge --}}
+                                            <div class="mb-2">
                                                 @if($program->status == 'aktif')
                                                     <span class="badge badge-success">Aktif</span>
                                                 @elseif($program->status == 'nonaktif')
@@ -86,42 +84,63 @@
                                                 @else
                                                     <span class="badge badge-info">Selesai</span>
                                                 @endif
-                                            </td>
-                                            <td>{{ $program->tanggal_mulai->format('d/m/Y') }}</td>
-                                            <td class="td-actions text-right">
-                                                <a href="{{ route('program-bansos.show', $program) }}" rel="tooltip" title="View" class="btn btn-info btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('program-bansos.edit', $program) }}" rel="tooltip" title="Edit" class="btn btn-warning btn-sm">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <form action="{{ route('program-bansos.destroy', $program) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" rel="tooltip" title="Delete" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="7" class="text-center">Tidak ada data</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                            </div>
 
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="text-muted">
+                                            {{-- Quota Info --}}
+                                            <small class="text-muted">
+                                                <i class="fa fa-users"></i> Kuota: {{ $program->kuota_tersisa }}/{{ $program->kuota }} tersisa
+                                            </small>
+                                            <br>
+
+                                            {{-- Nominal --}}
+                                            <strong class="text-primary">
+                                                Rp {{ number_format($program->nominal_bantuan ?? 0, 0, ',', '.') }}
+                                            </strong>
+                                        </div>
+
+                                        {{-- Action Buttons --}}
+                                        <div class="btn-group btn-group-sm w-100" role="group">
+                                            <a href="{{ route('program-bansos.show', $program) }}" class="btn btn-info" title="Lihat Detail">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('program-bansos.edit', $program) }}" class="btn btn-warning" title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-danger" onclick="deleteProgram({{ $program->id }})" title="Hapus">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+
+                                        {{-- Hidden Form for Delete --}}
+                                        <form id="delete-form-{{ $program->id }}" action="{{ route('program-bansos.destroy', $program) }}" method="POST" class="d-none">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if($loop->last)
+                                </div>
+                            @elseif(($loop->index + 1) % 3 == 0)
+                                </div>
+                                <div class="row">
+                            @endif
+
+                        @empty
+                            <div class="alert alert-info text-center" role="alert">
+                                <i class="fa fa-info-circle"></i> Tidak ada program bansos yang ditemukan
+                            </div>
+                        @endforelse
+
+                        {{-- Pagination --}}
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-muted mb-0">
                                         Menampilkan {{ $programBansos->firstItem() ?? 0 }} sampai {{ $programBansos->lastItem() ?? 0 }} dari {{ $programBansos->total() }} hasil
                                     </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="float-right">
+                                    <div>
                                         {{ $programBansos->links() }}
                                     </div>
                                 </div>
@@ -133,6 +152,30 @@
         </div>
     </div>
 </div>
+
+<style>
+    .transition {
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-2px);
+    }
+
+    .btn-group-sm .btn {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+</style>
+
+<script>
+    function deleteProgram(programId) {
+        if (confirm('Apakah Anda yakin ingin menghapus program ini?')) {
+            document.getElementById('delete-form-' + programId).submit();
+        }
+    }
+</script>
 @endsection
 
 
