@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Auth;
 class PenyaluranBansosController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      */
@@ -54,9 +50,9 @@ class PenyaluranBansosController extends Controller
         $programBansos = ProgramBansos::all();
 
         // Admin melihat dengan Table, Staff melihat dengan Card/List
-        if ($user->isAdmin()) {
+        if ($user->role === 'admin') {
             return view('penyaluran-bansos.admin.index', compact('penyaluranBansos', 'programBansos'));
-        } elseif ($user->isStaff()) {
+        } elseif ($user->role === 'staff') {
             return view('penyaluran-bansos.staff.index', compact('penyaluranBansos', 'programBansos'));
         }
 
@@ -122,9 +118,9 @@ class PenyaluranBansosController extends Controller
     public function show(PenyaluranBansos $penyaluranBansos)
     {
         Gate::authorize('is-admin-or-staff');
-        
+
         $penyaluranBansos->load(['penerimaBansos', 'programBansos', 'distributor']);
-        
+
         return view('penyaluran-bansos.show', compact('penyaluranBansos'));
     }
 
@@ -134,11 +130,11 @@ class PenyaluranBansosController extends Controller
     public function edit(PenyaluranBansos $penyaluranBansos)
     {
         Gate::authorize('is-admin-or-staff');
-        
+
         $penerimaBansos = PenerimaBansos::where('status_verifikasi', 'diterima')
             ->with('programBansos')
             ->get();
-        
+
         return view('penyaluran-bansos.edit', compact('penyaluranBansos', 'penerimaBansos'));
     }
 
@@ -168,7 +164,7 @@ class PenyaluranBansosController extends Controller
             if ($penyaluranBansos->bukti_penyaluran) {
                 Storage::disk('public')->delete($penyaluranBansos->bukti_penyaluran);
             }
-            
+
             $bukti = $request->file('bukti_penyaluran');
             $buktiPath = $bukti->store('bukti-penyaluran', 'public');
             $validated['bukti_penyaluran'] = $buktiPath;

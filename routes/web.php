@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonasiController;
@@ -88,7 +87,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('users', UserController::class);
 
     // CRUD Bansos
-    // Route::resource('bansos', BansosController::class);
+    Route::resource('bansos', BansosController::class);
 
     // Laporan
     // Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
@@ -147,12 +146,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     Route::get('program-bansos/{programBansos}', [App\Http\Controllers\ProgramBansosController::class, 'show'])->name('program-bansos.show');
 });
-
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])
-        ->name('user.index');
-});
-
 
 // ============================================
 // PENERIMA BANSOS - ADMIN OR STAFF ROUTES

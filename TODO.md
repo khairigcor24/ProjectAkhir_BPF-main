@@ -39,3 +39,28 @@
 - ✅ Implemented Intersection Observer for progress bars
 - ✅ Added tooltip-like hover effects for cards
 - ✅ Ensured responsive design with existing media queries
+
+# TODO: Complete Role Management for Admin - IN PROGRESS
+
+## Step 1: Update UserRequest Validation
+- Add role validation to UserRequest
+
+## Step 2: Update UserController
+- Fix store method to set role (default to 'guest')
+- Fix destroy redirect to admin.users.index
+
+## Step 3: Update Users Index View
+- Add Role column to the table
+
+## Step 4: Update Users Create View
+- Add role select field
+
+## Step 5: Update Users Edit View
+- Add role select field
+
+## Step 6: Update Users Show View
+- Add role display
+
+## Step 7: Test Functionality
+- Ensure admin can create/edit users with roles
+- Ensure role management works properly

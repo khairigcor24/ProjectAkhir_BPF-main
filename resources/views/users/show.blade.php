@@ -21,13 +21,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="form-control-label">{{ __('Role') }}</label>
+                                <p class="form-control-plaintext">{{ ucfirst($user->role) }}</p>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="form-control-label">{{ __('Created At') }}</label>
                                 <p class="form-control-plaintext">{{ $user->created_at->format('Y-m-d H:i:s') }}</p>
                             </div>
 
                             <div class="text-center">
-                                <a href="{{ route('user.index') }}" class="btn btn-default mt-4">{{ __('Back to List') }}</a>
-                                <a href="{{ route('user.edit', $user) }}" class="btn btn-primary mt-4">{{ __('Edit User') }}</a>
+                                <a href="{{ route('admin.users.index') }}" class="mt-4 btn btn-default">{{ __('Back to List') }}</a>
+                                <a href="{{ route('admin.users.edit', $user) }}" class="mt-4 btn btn-primary">{{ __('Edit User') }}</a>
                             </div>
                         </div>
                     </div>

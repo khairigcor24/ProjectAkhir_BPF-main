@@ -10,7 +10,7 @@
                             <h4 class="card-title">{{ __('Create User') }}</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('user.store') }}">
+                            <form method="POST" action="{{ route('admin.users.store') }}">
                                 @csrf
 
                                 @include('alerts.success')
@@ -39,9 +39,19 @@
                                     <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control" placeholder="{{ __('Confirm Password') }}" required>
                                 </div>
 
+                                <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-role">{{ __('Role') }}</label>
+                                    <select name="role" id="input-role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" required>
+                                        <option value="guest" {{ old('role', 'guest') == 'guest' ? 'selected' : '' }}>Guest</option>
+                                        <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
+                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'role'])
+                                </div>
+
                                 <div class="text-center">
-                                    <a href="{{ route('user.index') }}" class="btn btn-default mt-4">{{ __('Back') }}</a>
-                                    <button type="submit" class="btn btn-primary mt-4">{{ __('Create User') }}</button>
+                                    <a href="{{ route('user.index') }}" class="mt-4 btn btn-default">{{ __('Back') }}</a>
+                                    <button type="submit" class="mt-4 btn btn-primary">{{ __('Create User') }}</button>
                                 </div>
                             </form>
                         </div>
