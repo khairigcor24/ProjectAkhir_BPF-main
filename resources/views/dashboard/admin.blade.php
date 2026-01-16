@@ -7,7 +7,7 @@
             background:
                 linear-gradient(135deg,
                     rgba(102, 126, 234, 0.08) 0%,
-                    rgba(118, 75, 162, 0.1) 100%),
+                    rgba(118, 75, 162, 0.1) 100%
                 );
             background-size: cover;
             background-position: center;
@@ -17,7 +17,11 @@
         }
 
         .content::before {
-            z-index: 0;
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
 
         .card-stats {
@@ -197,7 +201,7 @@
 
         @media (max-width: 768px) {
             .card-stats {
-                margin-bottom: 1rem 1.;
+                margin-bottom: 1rem;
             }
 
             .card-header {
@@ -217,13 +221,27 @@
                 padding: 0.5rem;
                 font-size: 0.9rem;
             }
+
+            .dashboard-stats {
+                margin-bottom: 40px;
+            }
+
+            .section-divider {
+                height: 1px;
+                background: linear-gradient
+                (to right, 
+                transparent,
+                #e0e0e0, 
+                transparent);
+                margin: 33px 0;
+            }
         }
     </style>
 
     <div class="content">
         <div class="container-fluid">
             {{-- Statistik Cards --}}
-            <div class="row">
+            <div class="row mt-4 align-items-stretch dashboard-stats">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-body">
@@ -242,7 +260,6 @@
                             </div>
                         </div>
                         <div class="card-footer">
-
                             <div class="stats text-success">
                                 <i class="fa fa-check-circle"></i> {{ $stats['program_aktif'] }} Aktif
                             </div>
@@ -268,7 +285,6 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <hr>
                             <div class="stats text-warning">
                                 <i class="fa fa-clock-o"></i> {{ $stats['penerima_pending'] }} Pending
                             </div>
@@ -294,7 +310,6 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <hr>
                             <div class="stats">
                                 <i class="fa fa-refresh"></i> {{ $stats['penyaluran_disalurkan'] }} Selesai
                             </div>
@@ -321,7 +336,6 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <hr>
                             <div class="stats">
                                 <i class="fa fa-heart text-danger"></i> {{ $stats['total_donasi'] }} Donatur
                             </div>
@@ -329,6 +343,7 @@
                     </div>
                 </div>
             </div>
+            <div class="section-divider"></div>
 
             {{-- Row untuk Tabel --}}
             <div class="row">
