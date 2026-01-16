@@ -232,4 +232,25 @@ class PenerimaBansosController extends Controller
         return redirect()->route('penerima-bansos.index')
             ->with('success', 'Verifikasi berhasil dilakukan.');
     }
+
+    /**
+     * Download dokumen pendukung
+     */
+    public function downloadDokumen(PenerimaBansos $penerimaBansos, $filename)
+    {
+        Gate::authorize('is-admin-or-staff');
+
+        // Pastikan dokumen milik penerima ini
+        if (!$penerimaBansos->dokumen_pendukung || !in_array($filename, $penerimaBansos->dokumen_pendukung)) {
+            abort(404);
+        }
+
+        $path = storage_path('app/public/' . $filename);
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        return response()->download($path);
+    }
 }
