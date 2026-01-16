@@ -24,17 +24,23 @@ class PenerimaBansosController extends Controller
 
         // Search
         if ($request->filled('search')) {
-            $query->search($request->search);
+            $query->where(function ($q) use ($request) {
+                $q->where('nama_lengkap', 'like', "%{$request->search}%")
+                  ->orWhere('nik', 'like', "%{$request->search}%")
+                  ->orWhere('alamat', 'like', "%{$request->search}%");
+            });
         }
 
         // Filter by program
         if ($request->filled('program_bansos_id')) {
-            $query->where('program_bansos_id', $request->program_bansos_id);
+            $query->where('program_bansos_id',
+            $request->program_bansos_id);
         }
 
         // Filter by status verifikasi
         if ($request->filled('status_verifikasi')) {
-            $query->where('status_verifikasi', $request->status_verifikasi);
+            $query->where('status_verifikasi',
+            $request->status_verifikasi);
         }
 
         $penerimaBansos = $query->paginate(15)->withQueryString();
@@ -88,7 +94,7 @@ class PenerimaBansosController extends Controller
             'provinsi' => 'nullable|string|max:255',
             'telepon' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
-            'jumlah_anggota_keluarga' => 'nullable|integer|min:1',
+            'jumlah_anggota_keluarga' => 'required|integer|min:1',
             'penghasilan_perbulan' => 'nullable|numeric|min:0',
             'status_ekonomi' => 'nullable|in:sangat_miskin,miskin,menengah_bawah,menengah',
             'keterangan' => 'nullable|string',
@@ -109,7 +115,6 @@ class PenerimaBansosController extends Controller
         $validated['status_verifikasi'] = 'pending';
 
         PenerimaBansos::create($validated);
-
         $redirectRoute = Auth::check() && Auth::user()->role === 'admin'
             ? route('penerima-bansos.index')
             : route('guest.penerima-bansos.success');
@@ -126,7 +131,6 @@ class PenerimaBansosController extends Controller
         Gate::authorize('is-admin-or-staff');
 
         $penerimaBansos->load(['programBansos', 'verifier', 'creator', 'penyaluran']);
-
         return view('penerima-bansos.show', compact('penerimaBansos'));
     }
 
@@ -206,8 +210,7 @@ class PenerimaBansosController extends Controller
 
         $penerimaBansos->delete();
 
-        return redirect()->route('penerima-bansos.index')
-            ->with('success', 'Data penerima bansos berhasil dihapus.');
+        return back()->with('success', 'Data penerima bansos berhasil dihapus.');
     }
 
     /**
@@ -229,28 +232,26 @@ class PenerimaBansosController extends Controller
             'tanggal_verifikasi' => now(),
         ]);
 
-        return redirect()->route('penerima-bansos.index')
-            ->with('success', 'Verifikasi berhasil dilakukan.');
+        return back()->with('success', 'Status berhasil diverifikasi');
     }
 
-    /**
-     * Download dokumen pendukung
-     */
-    public function downloadDokumen(PenerimaBansos $penerimaBansos, $filename)
-    {
-        Gate::authorize('is-admin-or-staff');
+        /**
+         * Download dokumen pendukung
+         */
+        public function downloadDokumen(PenerimaBansos $penerimaBansos, $filename)
+        {
+            Gate::authorize('is-admin-or-staff');
+    
+            $dokumen = collect($penerimaBansos->dokumen_pendukung)
+            ->first(fn ($item) => basename($item) === $filename);
+    
+            // Pastikan dokumen milik penerima ini
+            if (!$dokumen || !Storage::disk('public')->exists($dokumen)) {
+                abort(404);
+            }
 
-        // Pastikan dokumen milik penerima ini
-        if (!$penerimaBansos->dokumen_pendukung || !in_array($filename, $penerimaBansos->dokumen_pendukung)) {
-            abort(404);
+            $path = Storage::disk('public')->path($dokumen);
+        
+            return response()->download($path);
         }
-
-        $path = storage_path('app/public/' . $filename);
-
-        if (!file_exists($path)) {
-            abort(404);
-        }
-
-        return response()->download($path);
     }
-}

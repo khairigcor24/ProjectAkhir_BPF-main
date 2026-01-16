@@ -8,9 +8,15 @@ use App\Models\ProgramBansos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PenyaluranBansosController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +24,7 @@ class PenyaluranBansosController extends Controller
     {
         Gate::authorize('is-admin-or-staff');
 
-        $user = auth()->user();
+        $user = Auth::user();
         $query = PenyaluranBansos::with(['penerimaBansos', 'programBansos', 'distributor'])->latest();
 
         // Search
@@ -103,8 +109,6 @@ class PenyaluranBansosController extends Controller
             $buktiPath = $bukti->store('bukti-penyaluran', 'public');
             $validated['bukti_penyaluran'] = $buktiPath;
         }
-
-        $validated['disalurkan_oleh'] = auth()->id();
 
         PenyaluranBansos::create($validated);
 

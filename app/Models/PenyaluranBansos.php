@@ -36,6 +36,10 @@ class PenyaluranBansos extends Model
         return $this->belongsTo(PenerimaBansos::class, 'penerima_bansos_id');
     }
 
+    public function penyaluran() {
+        return $this->hasMany(PenyaluranBansos::class);
+    }
+
     /**
      * Relasi ke Program Bansos
      */

@@ -164,9 +164,11 @@
                                                 <div class="text-center card-body">
                                                     <i class="mb-2 fa fa-file-pdf fa-3x text-danger"></i>
                                                     <p class="small">{{ basename($dokumen) }}</p>
-                                                                                                            @foreach ($penerimaBansos->dokumen_pendukung as $dokumen)
+                                                    @foreach ($penerimaBansos->dokumen_pendukung as $dokumen)
                                                         <a href="{{ route('penerima-bansos.download',
-                                                        [$penerimaBansos->id, basename($dokumen)]) }}" target="_blank" class="btn btn-sm btn-info">
+                                                        [$penerimaBansos->id, basename($dokumen)]) }}" 
+                                                        target="_blank"
+                                                        class="btn btn-sm btn-info">
                                                         <i class="fa fa-download"></i> Download                                                        </a>
                                                         @endforeach
                                                     </a>

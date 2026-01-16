@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * Check if user is admin
      */
-    public function isAdmin(): bool
+    public function isAdmin()
     {
         return $this->role === 'admin';
     }
@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * Check if user is staff
      */
-    public function isStaff(): bool
+    public function isStaff()
     {
         return $this->role === 'staff';
     }
