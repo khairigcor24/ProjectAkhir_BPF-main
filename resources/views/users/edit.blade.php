@@ -10,7 +10,7 @@
                             <h4 class="card-title">{{ __('Edit User') }}</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('user.update', $user) }}">
+                            <form method="POST" action="{{ route('admin.users.update', $user) }}">
                                 @csrf
                                 @method('PUT')
 
@@ -41,8 +41,8 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <a href="{{ route('user.index') }}" class="btn btn-default mt-4">{{ __('Back') }}</a>
-                                    <button type="submit" class="btn btn-primary mt-4">{{ __('Update User') }}</button>
+                                    <a href="{{ route('user.index') }}" class="mt-4 btn btn-default">{{ __('Back') }}</a>
+                                    <button type="submit" class="mt-4 btn btn-primary">{{ __('Update User') }}</button>
                                 </div>
                             </form>
                         </div>

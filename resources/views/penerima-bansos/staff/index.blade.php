@@ -185,7 +185,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="POST"
-                                                action="{{ route('penerima-bansos.verifikasi', $penerima->id) }}">
+                                                action="{{ route('penerima-bansos.verifikasi', $penerima) }}">
                                                 @csrf
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Verifikasi Penerima Bansos</h5>
@@ -196,7 +196,7 @@
                                                 <div class="modal-body">
                                                     <p><strong>Nama:</strong> {{ $penerima->nama_lengkap }}</p>
                                                     <p><strong>Program:</strong> {{ $penerima->programBansos->nama_program }}</p>
-                                                    
+
                                                     <div class="form-group">
                                                         <label>Status Verifikasi <span class="text-danger">*</span></label>
                                                         <select name="status_verifikasi" class="form-control" required>
@@ -204,7 +204,7 @@
                                                             <option value="ditolak">Ditolak</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <label>Catatan</label>
                                                         <textarea name="catatan_verifikasi" class="form-control" rows="3" placeholder="Catatan verifikasi (opsional)">{{ old('catatan_verifikasi', $penerima->catatan_verifikasi) }}</textarea>

@@ -10,12 +10,12 @@
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <h3 class="mb-0">{{ __('Users') }}</h3>
-                                    <p class="text-sm mb-0">
+                                    <p class="mb-0 text-sm">
                                         {{ __('This is an example of user management. This is a minimal setup in order to get started fast.') }}
                                     </p>
                                 </div>
-                                <div class="col-4 text-right">
-                                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
+                                <div class="text-right col-4">
+                                    <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -23,8 +23,8 @@
                         <div class="card-body">
                             @include('alerts.success', ['key' => 'success'])
                             @include('alerts.errors')
-                            
-                            <div class="row mb-3">
+
+                            <div class="mb-3 row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="perPage">{{ __('Show') }}</label>
@@ -40,7 +40,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="search">{{ __('Search') }}</label>
-                                        <form method="GET" action="{{ route('user.index') }}" id="searchForm">
+                                        <form method="GET" action="{{ route('admin.users.index') }}" id="searchForm">
                                             @if(request('per_page'))
                                                 <input type="hidden" name="per_page" value="{{ request('per_page') }}">
                                             @endif
@@ -63,6 +63,7 @@
                                         <tr>
                                             <th>{{ __('Name') }}</th>
                                             <th>{{ __('Email') }}</th>
+                                            <th>{{ __('Role') }}</th>
                                             <th>{{ __('Start') }}</th>
                                             <th class="text-right">{{ __('Actions') }}</th>
                                         </tr>
@@ -73,14 +74,14 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
-                                                <td class="td-actions text-right">
-                                                    <a href="{{ route('user.show', $user) }}" rel="tooltip" title="{{ __('View') }}" class="btn btn-info btn-sm">
+                                                <td class="text-right td-actions">
+                                                    <a href="{{ route('admin.users.show', $user) }}" rel="tooltip" title="{{ __('View') }}" class="btn btn-info btn-sm">
                                                         {{ __('View') }}
                                                     </a>
-                                                    <a href="{{ route('user.edit', $user) }}" rel="tooltip" title="{{ __('Edit') }}" class="btn btn-warning btn-sm">
+                                                    <a href="{{ route('admin.users.edit', $user) }}" rel="tooltip" title="{{ __('Edit') }}" class="btn btn-warning btn-sm">
                                                         {{ __('Edit') }}
                                                     </a>
-                                                    <form action="{{ route('user.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to delete this user?') }}');">
+                                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to delete this user?') }}');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" rel="tooltip" title="{{ __('Delete') }}" class="btn btn-danger btn-sm">

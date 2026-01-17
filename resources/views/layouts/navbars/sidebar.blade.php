@@ -10,8 +10,8 @@
 
     {{-- ADMIN --}}
     @if(auth()->user()->isAdmin())
-        <li class="{{ str_contains(request()->route()->getName(), 'user') ? 'active' : '' }}">
-            <a href="{{ route('user.index') }}">
+        <li class="{{ str_contains(request()->route()->getName(), 'admin.users') ? 'active' : '' }}">
+            <a href="{{ route('admin.users.index') }}">
                 <i class="nc-icon nc-single-02"></i>
                 <p>User Management</p>
             </a>
@@ -31,14 +31,14 @@
             </a>
         </li>
 
-        <li class="{{ str_contains(request()->route()->getName(), 'penyaluran-bansos') ? 'active' : '' }}">
+        <li class="{{ str_contains(request()->route()->getName(), 'penyaluran-bansos.index') ? 'active' : '' }}">
             <a href="{{ route('penyaluran-bansos.index') }}">
                 <i class="nc-icon nc-delivery-fast"></i>
                 <p>Penyaluran Bansos</p>
             </a>
         </li>
 
-        <li class="{{ str_contains(request()->route()->getName(), 'donasi') ? 'active' : '' }}">
+        <li class="{{ str_contains(request()->route()->getName(), 'donasi.') ? 'active' : '' }}">
             <a href="{{ route('donasi.index') }}">
                 <i class="nc-icon nc-money-coins"></i>
                 <p>Kelola Donasi</p>

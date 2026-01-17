@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonasiController;
@@ -88,7 +87,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('users', UserController::class);
 
     // CRUD Bansos
-    // Route::resource('bansos', BansosController::class);
+    Route::resource('bansos', BansosController::class);
 
     // Laporan
     // Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
@@ -148,19 +147,13 @@ Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     Route::get('program-bansos/{programBansos}', [App\Http\Controllers\ProgramBansosController::class, 'show'])->name('program-bansos.show');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])
-        ->name('user.index');
-});
-
-
 // ============================================
 // PENERIMA BANSOS - ADMIN OR STAFF ROUTES
 // ============================================
 Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     Route::get('penerima-bansos', [PenerimaBansosController::class, 'index'])->name('penerima-bansos.index');
     Route::get('penerima-bansos/{penerimaBansos}', [PenerimaBansosController::class, 'show'])->name('penerima-bansos.show');
-    Route::post('penerima-bansos/{penerima}/verifikasi',
+    Route::post('penerima-bansos/{penerimaBansos}/verifikasi',
         [PenerimaBansosController::class, 'verifikasi'])
     ->name('penerima-bansos.verifikasi');
     Route::get('penerima-bansos/{penerimaBansos}/download/{filename}',
