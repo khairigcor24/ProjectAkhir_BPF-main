@@ -1,39 +1,38 @@
 <!--
 =========================================================
-SEJAHTERA - v2.0.1
+SISTEM BANSOS - Aplikasi Manajemen Bantuan Sosial
 =========================================================
 
- Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com) & Updivision (https://www.updivision.com)
- Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim & Updivision
+ Sistem Informasi Manajemen Bantuan Sosial
+ Platform Terintegrasi untuk Donasi & Penyaluran Bantuan
 
 =========================================================
-
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+-->
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="id">
     <head>
         <meta charset="utf-8" />
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
         <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.ico') }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>{{ $title }}</title>
+        <title>{{ $title }} | Sistem Bansos</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+        <meta name="description" content="Sistem Informasi Manajemen Bantuan Sosial - Platform Terintegrasi untuk Donasi dan Penyaluran Bantuan Sosial" />
         <!--     Fonts and icons     -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         <!-- CSS Files -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/light-bootstrap-dashboard.css?v=2.0.0') }} " rel="stylesheet" />
-
+        <link href="{{ asset('assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/layout-improvements.css') }}" rel="stylesheet" />
+        @stack('css')
     </head>
 
     <body>
-<div class="wrapper @if (request()->route()->getName() == 'login' || request()->route()->getName() == 'register') wrapper-full-page @endif">
+        <div class="wrapper @if (request()->route()->getName() == 'login' || request()->route()->getName() == 'register') wrapper-full-page @endif">
 
             @if (auth()->check() && request()->route()->getName() != "")
                 @include('layouts.navbars.sidebar')
@@ -42,86 +41,86 @@ SEJAHTERA - v2.0.1
 
             <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
                 @include('layouts.navbars.navbar')
-                @yield('content')
+
+                <div class="content-wrapper">
+                    @yield('content')
+                </div>
+
                 @include('layouts.footer.nav')
             </div>
 
         </div>
 
-
-
     </body>
-        <!--   Core JS Files   -->
+    <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('assets/js/plugins/jquery.sharrre.js') }}"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <!--  Plugin for Switches -->
     <script src="{{ asset('assets/js/plugins/bootstrap-switch.js') }}"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!--  Chartist Plugin  -->
     <script src="{{ asset('assets/js/plugins/chartist.min.js') }}"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <!-- Control Center for Light Bootstrap Dashboard -->
     <script src="{{ asset('assets/js/light-bootstrap-dashboard.js?v=2.0.0') }}" type="text/javascript"></script>
-    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+    <!-- Light Bootstrap Dashboard DEMO methods -->
     <script src="{{ asset('assets/js/demo.js') }}"></script>
-    @stack('js')
-    <script>
-      $(document).ready(function () {
+    <!-- Enhanced Layout Scripts -->
+    <script src="{{ asset('assets/js/layout-enhancements.js') }}" type="text/javascript"></script>
+        $(document).ready(function () {
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip({
+                trigger: 'hover',
+                delay: { show: 500, hide: 100 }
+            });
 
-        $('#facebook').sharrre({
-          share: {
-            facebook: true
-          },
-          enableHover: false,
-          enableTracking: false,
-          enableCounter: false,
-          click: function(api, options) {
-            api.simulateClick();
-            api.openPopup('facebook');
-          },
-          template: '<i class="fab fa-facebook-f"></i> Facebook',
-          url: 'https://light-bootstrap-dashboard-laravel.creative-tim.com/login'
-        });
+            // Smooth scroll for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this.getAttribute('href'));
+                if(target.length) {
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 80
+                    }, 1000);
+                }
+            });
 
-        $('#google').sharrre({
-          share: {
-            googlePlus: true
-          },
-          enableCounter: false,
-          enableHover: false,
-          enableTracking: true,
-          click: function(api, options) {
-            api.simulateClick();
-            api.openPopup('googlePlus');
-          },
-          template: '<i class="fab fa-google-plus"></i> Google',
-          url: 'https://light-bootstrap-dashboard-laravel.creative-tim.com/login'
-        });
+            // Auto-hide alerts after 5 seconds
+            setTimeout(function() {
+                $('.alert:not(.alert-permanent)').fadeOut('slow');
+            }, 5000);
 
-        $('#twitter').sharrre({
-          share: {
-            twitter: true
-          },
-          enableHover: false,
-          enableTracking: false,
-          enableCounter: false,
-          buttons: {
-            twitter: {
-              via: 'CreativeTim'
+            // Add loading state to form submissions
+            $('form').on('submit', function() {
+                var submitBtn = $(this).find('button[type="submit"]');
+                var originalText = submitBtn.text();
+                submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Loading...');
+            });
+
+            // Responsive sidebar toggle
+            if($(window).width() <= 991) {
+                $('.sidebar').addClass('sidebar-mobile');
             }
-          },
-          click: function(api, options) {
-            api.simulateClick();
-            api.openPopup('twitter');
-          },
-          template: '<i class="fab fa-twitter"></i> Twitter',
-          url: 'https://light-bootstrap-dashboard-laravel.creative-tim.com/login'
+
+            $(window).resize(function() {
+                if($(window).width() <= 991) {
+                    $('.sidebar').addClass('sidebar-mobile');
+                } else {
+                    $('.sidebar').removeClass('sidebar-mobile');
+                }
+            });
+
+            // Enhanced navigation active state
+            var currentUrl = window.location.pathname;
+            $('.nav a').each(function() {
+                var href = $(this).attr('href');
+                if(href === currentUrl || currentUrl.includes(href.replace('index', ''))) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
         });
-      });
     </script>
 </html>

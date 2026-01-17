@@ -15,7 +15,7 @@
                                     </p>
                                 </div>
                                 <div class="text-right col-4">
-                                    <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
+                                    <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="search">{{ __('Search') }}</label>
-                                        <form method="GET" action="{{ route('admin.users.index') }}" id="searchForm">
+                                        <form method="GET" action="{{ route('users.index') }}" id="searchForm">
                                             @if(request('per_page'))
                                                 <input type="hidden" name="per_page" value="{{ request('per_page') }}">
                                             @endif
@@ -75,13 +75,13 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
                                                 <td class="text-right td-actions">
-                                                    <a href="{{ route('admin.users.show', $user) }}" rel="tooltip" title="{{ __('View') }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('users.show', $user) }}" rel="tooltip" title="{{ __('View') }}" class="btn btn-info btn-sm">
                                                         {{ __('View') }}
                                                     </a>
-                                                    <a href="{{ route('admin.users.edit', $user) }}" rel="tooltip" title="{{ __('Edit') }}" class="btn btn-warning btn-sm">
+                                                    <a href="{{ route('users.edit', $user) }}" rel="tooltip" title="{{ __('Edit') }}" class="btn btn-warning btn-sm">
                                                         {{ __('Edit') }}
                                                     </a>
-                                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to delete this user?') }}');">
+                                                    <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to delete this user?') }}');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" rel="tooltip" title="{{ __('Delete') }}" class="btn btn-danger btn-sm">
