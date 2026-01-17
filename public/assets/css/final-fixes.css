@@ -4,6 +4,11 @@
 
 /* Fix Light Bootstrap Dashboard conflicts */
 
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
 .main-panel .content {
     background: linear-gradient(135deg, #f8fafc 0%, #eef2f5 100%) !important;
     padding: 30px 25px;
@@ -15,6 +20,10 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.sidebar {
+    flex-shrink: 0;
 }
 
 /* Fix sidebar styling conflicts */
@@ -342,3 +351,50 @@ footer.footer a:hover {
 .wrapper:after {
     display: none !important;
 }
+
+/* 1. Sidebar dikunci posisinya */
+.sidebar {
+    width: 260px !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1030;
+}
+
+/* 2. Sidebar wrapper full tinggi */
+.sidebar-wrapper {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* 3. Main panel ngalah ke sidebar */
+.main-panel {
+    margin-left: 260px !important;
+    width: calc(100% - 260px) !important;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 4. Navbar hanya ikut main panel */
+.main-panel .navbar {
+    margin-left: 0 !important;
+    width: 100% !important;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+@media (max-width: 991px) {
+    .sidebar {
+        position: relative;
+        width: 100% !important;
+        height: auto;
+    }
+
+    .main-panel {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
