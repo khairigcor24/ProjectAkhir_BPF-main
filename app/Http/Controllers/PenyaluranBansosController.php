@@ -89,11 +89,11 @@ class PenyaluranBansosController extends Controller
         $validated = $request->validate([
             'penerima_bansos_id' => 'required|exists:penerima_bansos,id',
             'program_bansos_id' => 'required|exists:program_bansos,id',
-            'nominal_diterima' => 'required|numeric|min:0',
+            'nominal_diterima' => 'required|integer|min:0',
             'metode_penyaluran' => 'required|in:transfer,tunai,voucher,barang',
             'no_rekening' => 'nullable|string|max:50|required_if:metode_penyaluran,transfer',
             'nama_bank' => 'nullable|string|max:255|required_if:metode_penyaluran,transfer',
-            'bukti_penyaluran' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'bukti_penyaluran' => 'required_if:status,disalurkan|file|mimes:pdf,jpg,jpeg,png|max:2048',
             'tanggal_penyaluran' => 'required|date',
             'status' => 'required|in:dijadwalkan,diproses,disalurkan,gagal',
             'catatan' => 'nullable|string',

@@ -44,11 +44,11 @@ Route::prefix('guest')->name('guest.')->group(function () {
     Route::get('/donasi/search', [GuestDonasiController::class, 'search'])->name('donasi.search');
     Route::get('/donasi/create', [GuestDonasiController::class, 'create'])->name('donasi.create');
     Route::post('/donasi', [GuestDonasiController::class, 'store'])->name('donasi.store');
-    
+
     // Program Bansos Info untuk Guest
     Route::get('program-bansos', [GuestProgramBansosController::class, 'index'])->name('program-bansos.index');
     Route::get('program-bansos/{programBansos}', [GuestProgramBansosController::class, 'show'])->name('program-bansos.show');
-    
+
     // Penerima Bansos - Guest Registration
     Route::get('penerima-bansos/create', [PenerimaBansosController::class, 'create'])->name('penerima-bansos.create');
     Route::post('penerima-bansos', [PenerimaBansosController::class, 'store'])->name('penerima-bansos.store');
@@ -101,11 +101,11 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
 Route::middleware('auth')->group(function () {
     // Dashboard & Profile
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
-    
+
     // User Donasi Request
     Route::get('/donasi/ajukan', [GuestDonasiController::class, 'index'])->name('donasi.user');
 });
@@ -119,10 +119,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     // User Management
     Route::resource('users', UserController::class);
-    
+
     // Donasi Admin CRUD
     Route::resource('donasi', DonasiController::class);
-    
+
     // Program Bansos Admin CRUD - Explicit routes to ensure correct parameter binding
     Route::get('program-bansos', [ProgramBansosController::class, 'index'])->name('program-bansos.index');
     Route::get('program-bansos/create', [ProgramBansosController::class, 'create'])->name('program-bansos.create');
@@ -130,14 +130,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('program-bansos/{programBansos}/edit', [ProgramBansosController::class, 'edit'])->name('program-bansos.edit');
     Route::put('program-bansos/{programBansos}', [ProgramBansosController::class, 'update'])->name('program-bansos.update');
     Route::delete('program-bansos/{programBansos}', [ProgramBansosController::class, 'destroy'])->name('program-bansos.destroy');
-    
+
     // Penerima Bansos Admin CRUD - Explicit routes to ensure correct parameter binding
     Route::get('penerima-bansos/create', [PenerimaBansosController::class, 'create'])->name('penerima-bansos.create');
     Route::post('penerima-bansos', [PenerimaBansosController::class, 'store'])->name('penerima-bansos.store');
     Route::get('penerima-bansos/{penerimaBansos}/edit', [PenerimaBansosController::class, 'edit'])->name('penerima-bansos.edit');
     Route::put('penerima-bansos/{penerimaBansos}', [PenerimaBansosController::class, 'update'])->name('penerima-bansos.update');
     Route::delete('penerima-bansos/{penerimaBansos}', [PenerimaBansosController::class, 'destroy'])->name('penerima-bansos.destroy');
-    
+
     // Bansos (Legacy - from admin prefix)
     Route::resource('bansos', BansosController::class);
 });
@@ -166,16 +166,19 @@ Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     Route::get('donasi/laporan', [DonasiController::class, 'laporan'])->name('donasi.laporan');
     Route::get('donasi/{donasi}', [DonasiController::class, 'show'])->name('donasi.show');
     Route::post('donasi/{donasi}/validate', [DonasiController::class, 'validateDonasi'])->name('donasi.validate');
-    
+
     // Program Bansos Show Only
     Route::get('program-bansos/{programBansos}', [ProgramBansosController::class, 'show'])->name('program-bansos.show');
-    
+
     // Penerima Bansos View & Verification
     Route::get('penerima-bansos', [PenerimaBansosController::class, 'index'])->name('penerima-bansos.index');
     Route::get('penerima-bansos/{penerimaBansos}', [PenerimaBansosController::class, 'show'])->name('penerima-bansos.show');
     Route::post('penerima-bansos/{penerimaBansos}/verifikasi', [PenerimaBansosController::class, 'verifikasi'])->name('penerima-bansos.verifikasi');
     Route::get('penerima-bansos/{penerimaBansos}/download/{filename}', [PenerimaBansosController::class, 'downloadDokumen'])->name('penerima-bansos.download');
-    
+
     // Penyaluran Bansos
-    Route::resource('penyaluran-bansos', PenyaluranBansosController::class);
+    Route::resource('penyaluran-bansos', PenyaluranBansosController::class)
+    ->parameters([
+        'penyaluran-bansos' => 'penyaluranBansos'
+    ]);
 });

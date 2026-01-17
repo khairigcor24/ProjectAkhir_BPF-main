@@ -10,9 +10,9 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Penerima Bansos</h3>
-                                <p class="text-sm mb-0">Daftar penerima bantuan sosial</p>
+                                <p class="mb-0 text-sm">Daftar penerima bantuan sosial</p>
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="text-right col-4">
                                 <a href="{{ route('penerima-bansos.create') }}" class="btn btn-sm btn-primary">
                                     <i class="fa fa-plus"></i> Tambah Penerima
                                 </a>
@@ -73,7 +73,7 @@
                                         <th>Alamat</th>
                                         <th>Status</th>
                                         <th>Tanggal Daftar</th>
-                                        <th class="text-right">Actions</th>
+                                        <th class="text-right" style="width: 155px">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,7 +94,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $penerima->created_at->format('d/m/Y') }}</td>
-                                            <td class="td-actions text-right">
+                                            <td class="text-right td-actions">
                                                 <a href="{{ route('penerima-bansos.show', $penerima) }}" rel="tooltip" title="View" class="btn btn-info btn-sm">
                                                     <i class="fa fa-eye"></i>
                                                 </a>

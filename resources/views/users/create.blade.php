@@ -10,7 +10,7 @@
                             <h4 class="card-title">{{ __('Create User') }}</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('admin.users.store') }}">
+                            <form method="POST" action="{{ route('users.store') }}">
                                 @csrf
 
                                 @include('alerts.success')

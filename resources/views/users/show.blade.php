@@ -31,8 +31,8 @@
                             </div>
 
                             <div class="text-center">
-                                <a href="{{ route('admin.users.index') }}" class="mt-4 btn btn-default">{{ __('Back to List') }}</a>
-                                <a href="{{ route('admin.users.edit', $user) }}" class="mt-4 btn btn-primary">{{ __('Edit User') }}</a>
+                                <a href="{{ route('users.index') }}" class="mt-4 btn btn-default">{{ __('Back to List') }}</a>
+                                <a href="{{ route('users.edit', $user) }}" class="mt-4 btn btn-primary">{{ __('Edit User') }}</a>
                             </div>
                         </div>
                     </div>

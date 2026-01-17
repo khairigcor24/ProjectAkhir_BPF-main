@@ -63,9 +63,8 @@
                                         <tr>
                                             <th>{{ __('Name') }}</th>
                                             <th>{{ __('Email') }}</th>
-                                            <th>{{ __('Role') }}</th>
                                             <th>{{ __('Start') }}</th>
-                                            <th class="text-right">{{ __('Actions') }}</th>
+                                            <th class="text-right" style="width: 205px">{{ __('Actions') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

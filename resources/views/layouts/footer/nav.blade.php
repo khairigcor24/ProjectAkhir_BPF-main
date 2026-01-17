@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="footer-content">
             <div class="footer-section">
-                <h4 class="footer-title">Sistem Bansos</h4>
+                <h4 class="footer-title">SEJAHTERA</h4>
                 <p class="footer-description">Platform Terintegrasi Manajemen Bantuan Sosial dan Donasi</p>
             </div>
 

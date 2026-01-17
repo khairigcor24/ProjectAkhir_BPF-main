@@ -3,7 +3,7 @@
         <!-- Navbar Brand / Page Title -->
         <span class="navbar-brand navbar-brand-autodark d-none d-md-flex">
             <i class="nc-icon nc-chart-pie-35" style="color: #51cbce; font-size: 20px; margin-right: 10px;"></i>
-            <span class="font-weight-bold" style="color: #51cbce;">Sistem Bansos</span>
+            <span class="font-weight-bold" style="color: #51cbce;">SEJAHTERA</span>
         </span>
 
         <!-- Navbar Toggler -->
@@ -13,19 +13,19 @@
 
         <!-- Navbar Content -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="ml-auto navbar-nav">
                 <!-- Notifications -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
                         <span class="badge badge-danger badge-counter" style="display: none;">3</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow-md animated--grow-in" aria-labelledby="notificationDropdown">
+                    <div class="shadow-md dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="notificationDropdown">
                         <h6 class="dropdown-header bg-light font-weight-bold" style="color: #51cbce;">Notifikasi</h6>
-                        <a class="dropdown-item small text-gray-500" href="#">
+                        <a class="text-gray-500 dropdown-item small" href="#">
                             <i class="fa fa-check text-success"></i> Data diperbarui
                         </a>
-                        <div class="dropdown-divider m-0"></div>
+                        <div class="m-0 dropdown-divider"></div>
                         <a class="dropdown-item small" href="#">Lihat semua notifikasi</a>
                     </div>
                 </li>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow-md animated--grow-in" aria-labelledby="userDropdown">
+                    <div class="shadow-md dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown">
                         <h6 class="dropdown-header bg-light" style="border-bottom: 2px solid #51cbce; color: #51cbce; font-weight: 700;">
                             <i class="fa fa-user-circle"></i> Akun Saya
                         </h6>
@@ -62,7 +62,7 @@
                 </li>
 
                 <!-- Dark Mode Toggle (Optional) -->
-                <li class="nav-item ml-3">
+                <li class="ml-3 nav-item">
                     <a class="nav-link" href="#" id="themeToggle" title="Toggle Dark Mode">
                         <i class="fa fa-moon"></i>
                     </a>
