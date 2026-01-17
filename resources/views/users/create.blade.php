@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <a href="{{ route('user.index') }}" class="mt-4 btn btn-default">{{ __('Back') }}</a>
+                                    <a href="{{ route('users.index') }}" class="mt-4 btn btn-default">{{ __('Back') }}</a>
                                     <button type="submit" class="mt-4 btn btn-primary">{{ __('Create User') }}</button>
                                 </div>
                             </form>

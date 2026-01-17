@@ -6,7 +6,7 @@ $(document).ready(function() {
     // =============================================
     // 1. SMOOTH PAGE TRANSITIONS
     // =============================================
-    
+
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
@@ -14,7 +14,7 @@ $(document).ready(function() {
     // =============================================
     // 2. ENHANCED SIDEBAR FUNCTIONALITY
     // =============================================
-    
+
     // Active menu item highlighting
     const currentUrl = window.location.pathname;
     $('.sidebar .nav a').each(function() {
@@ -38,7 +38,7 @@ $(document).ready(function() {
     // =============================================
     // 3. AUTO-HIDE ALERTS
     // =============================================
-    
+
     const hideAlerts = () => {
         const alerts = $('.alert:not(.alert-permanent):not(.alert-dismissible)');
         if (alerts.length) {
@@ -49,21 +49,21 @@ $(document).ready(function() {
             }, 5000);
         }
     };
-    
+
     hideAlerts();
 
     // =============================================
     // 4. FORM SUBMISSION HANDLING
     // =============================================
-    
+
     $('form').on('submit', function(e) {
         const submitBtn = $(this).find('button[type="submit"]');
         const originalText = submitBtn.html();
-        
+
         // Disable and show loading state
         submitBtn.prop('disabled', true)
                 .html('<i class="fa fa-spinner fa-spin"></i> Memproses...');
-        
+
         // Re-enable button on error
         $(this).on('invalid', function() {
             submitBtn.prop('disabled', false).html(originalText);
@@ -73,32 +73,32 @@ $(document).ready(function() {
     // =============================================
     // 5. RESPONSIVE SIDEBAR
     // =============================================
-    
+
     const handleResponsiveSidebar = () => {
         const windowWidth = $(window).width();
         const sidebar = $('.sidebar');
-        
+
         if (windowWidth <= 991) {
             sidebar.addClass('sidebar-mobile');
         } else {
             sidebar.removeClass('sidebar-mobile');
         }
     };
-    
+
     handleResponsiveSidebar();
     $(window).resize(handleResponsiveSidebar);
 
     // =============================================
     // 6. SMOOTH SCROLL FOR ANCHORS
     // =============================================
-    
+
     $('a[href^="#"]').on('click', function(e) {
         const href = $(this).attr('href');
         if (href === '#') return;
-        
+
         e.preventDefault();
         const target = $(href);
-        
+
         if (target.length) {
             $('html, body').animate({
                 scrollTop: target.offset().top - 100
@@ -109,7 +109,7 @@ $(document).ready(function() {
     // =============================================
     // 7. TABLE ENHANCEMENTS
     // =============================================
-    
+
     // Add hover effects to table rows
     $('table tbody tr').hover(
         function() {
@@ -123,16 +123,16 @@ $(document).ready(function() {
     // =============================================
     // 8. BUTTON LOADING STATES
     // =============================================
-    
+
     $(document).on('click', '.btn-delete, .btn-confirm', function(e) {
         const btn = $(this);
-        
+
         if (!btn.hasClass('confirmed')) {
             e.preventDefault();
             btn.addClass('confirmed')
                .css('background-color', '#dc3545')
                .text('Yakin? Klik lagi untuk konfirmasi');
-            
+
             setTimeout(() => {
                 btn.removeClass('confirmed')
                    .css('background-color', '')
@@ -144,7 +144,7 @@ $(document).ready(function() {
     // =============================================
     // 9. NOTIFICATION HANDLER
     // =============================================
-    
+
     window.showNotification = function(message, type = 'info', duration = 3000) {
         const alertClass = `alert alert-${type}`;
         const alertHTML = `
@@ -155,9 +155,9 @@ $(document).ready(function() {
                 </button>
             </div>
         `;
-        
+
         const alertContainer = $('.content').prepend(alertHTML);
-        
+
         if (duration > 0) {
             setTimeout(() => {
                 alertContainer.find('.alert').fadeOut('slow', function() {
@@ -170,7 +170,7 @@ $(document).ready(function() {
     // =============================================
     // 10. PAGE LOAD ANIMATION
     // =============================================
-    
+
     $('.content-wrapper').fadeIn(300);
     $('.card').each(function(index) {
         const delay = index * 50;
@@ -182,12 +182,12 @@ $(document).ready(function() {
     // =============================================
     // 11. SEARCH & FILTER FUNCTIONALITY
     // =============================================
-    
+
     if ($('[data-search]').length) {
         $('[data-search]').on('keyup', function() {
             const searchTerm = $(this).val().toLowerCase();
             const targetSelector = $(this).data('search');
-            
+
             $(targetSelector).filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchTerm) > -1);
             });
@@ -197,7 +197,7 @@ $(document).ready(function() {
     // =============================================
     // 12. SECTION HEADER ANIMATIONS
     // =============================================
-    
+
     $('.nav-section-header').each(function(index) {
         $(this).css({
             'animation': 'slideInLeft 0.4s ease-out',
@@ -209,7 +209,7 @@ $(document).ready(function() {
     // =============================================
     // 13. RESPONSIVE TABLE WRAPPER
     // =============================================
-    
+
     if ($('table').length) {
         const tables = $('table');
         tables.each(function() {
@@ -222,7 +222,7 @@ $(document).ready(function() {
     // =============================================
     // 14. ENHANCED FORM VALIDATION
     // =============================================
-    
+
     if ($.fn.validate) {
         $('form').validate({
             highlight: function(element) {
@@ -242,14 +242,14 @@ $(document).ready(function() {
     // =============================================
     // 15. KEYBOARD SHORTCUTS
     // =============================================
-    
+
     $(document).on('keydown', function(e) {
         // Ctrl/Cmd + S untuk save
         if ((e.ctrlKey || e.metaKey) && e.keyCode === 83) {
             e.preventDefault();
             $('form').first().submit();
         }
-        
+
         // Esc untuk close modals
         if (e.keyCode === 27) {
             $('.modal.show').modal('hide');
@@ -259,28 +259,28 @@ $(document).ready(function() {
     // =============================================
     // 16. SESSION TIMEOUT WARNING
     // =============================================
-    
+
     let inactivityTimer;
     const sessionTimeout = 30 * 60 * 1000; // 30 menit
-    
+
     function resetInactivityTimer() {
         clearTimeout(inactivityTimer);
         inactivityTimer = setTimeout(() => {
             showNotification('Sesi Anda akan segera berakhir. Silakan refresh halaman.', 'warning', 0);
         }, sessionTimeout - 5 * 60 * 1000); // Warning 5 menit sebelum timeout
     }
-    
+
     $(document).on('mousemove keydown click', resetInactivityTimer);
     resetInactivityTimer();
 
     // =============================================
     // 17. CUSTOM SCROLLBAR TRACK
     // =============================================
-    
+
     if ($(window).scrollTop() > 100) {
         $('.navbar').addClass('scrolled');
     }
-    
+
     $(window).on('scroll', function() {
         if ($(window).scrollTop() > 100) {
             $('.navbar').addClass('scrolled');

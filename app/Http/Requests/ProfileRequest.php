@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class ProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return Auth::check();
     }
 
     /**
@@ -23,11 +24,12 @@ class ProfileRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:5120'],
         ];
     }
 }
