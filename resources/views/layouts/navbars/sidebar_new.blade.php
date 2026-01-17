@@ -75,19 +75,6 @@
                 <p>Kelola Donasi</p>
             </a>
         </li>
-
-        <!-- MANAJEMEN ASET BANSOS SECTION -->
-        <li class="nav-category">
-            <span class="nav-category-title">
-                <i class="nc-icon nc-gift-2"></i> MANAJEMEN ASET
-            </span>
-        </li>
-        <li class="{{ request()->routeIs('bansos.*') ? 'active' : '' }}">
-            <a href="{{ route('bansos.index') }}" class="nav-link">
-                <i class="nc-icon nc-gift-2"></i>
-                <p>Bansos Management</p>
-            </a>
-        </li>
     @endif
 
     {{-- ============================================ --}}
