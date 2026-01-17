@@ -137,12 +137,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('donasi/{donasi}', [DonasiController::class, 'update'])->name('donasi.update');
     Route::delete('donasi/{donasi}', [DonasiController::class, 'destroy'])->name('donasi.destroy');
 
-    // Program Bansos CRUD
+    // Program Bansos CRUD (Admin only)
     Route::resource('program-bansos', App\Http\Controllers\ProgramBansosController::class)->except(['show']);
 });
 
 // ============================================
-// PROGRAM BANSOS - ADMIN OR STAFF ROUTES
+// PROGRAM BANSOS - ADMIN OR STAFF ROUTES (Show only)
 // ============================================
 Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     Route::get('program-bansos/{programBansos}', [App\Http\Controllers\ProgramBansosController::class, 'show'])->name('program-bansos.show');

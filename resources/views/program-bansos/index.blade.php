@@ -103,19 +103,23 @@
                                             <a href="{{ route('program-bansos.show', $program) }}" class="btn btn-info" title="Lihat Detail">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                            @can('is-admin')
                                             <a href="{{ route('program-bansos.edit', $program) }}" class="btn btn-warning" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-danger" onclick="deleteProgram({{ $program->id }})" title="Hapus">
                                                 <i class="fa fa-trash"></i>
                                             </button>
+                                            @endcan
                                         </div>
 
                                         {{-- Hidden Form for Delete --}}
+                                        @can('is-admin')
                                         <form id="delete-form-{{ $program->id }}" action="{{ route('program-bansos.destroy', $program) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>
+                                        @endcan
                                     </div>
                                 </div>
                             </div>
