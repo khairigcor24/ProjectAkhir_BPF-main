@@ -28,30 +28,36 @@ SISTEM BANSOS - Aplikasi Manajemen Bantuan Sosial
         <link href="{{ asset('assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/layout-improvements.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/content-pages.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/final-fixes.css') }}" rel="stylesheet" />
         @stack('css')
     </head>
 
     <body>
-        <div class="wrapper @if (request()->route()->getName() == 'login' || request()->route()->getName() == 'register') wrapper-full-page @endif">
+    <div class="wrapper 
+        @if (request()->route()->getName() == 'login' || request()->route()->getName() == 'register') 
+            wrapper-full-page 
+        @endif">
+        
+        {{-- === SIDEBAR === --}}
+        @if (auth()->check() && request()->route()->getName() != "")
+            @include('layouts.navbars.sidebar')
+        @endif
 
-            @if (auth()->check() && request()->route()->getName() != "")
-                @include('layouts.navbars.sidebar')
-                @include('pages/sidebarstyle')
-            @endif
+        {{-- === MAIN PANEL === --}}
+        <div class="@if (auth()->check() && request()->route()->getName() != '') main-panel @endif">
+            @include('layouts.navbars.navbar')
 
-            <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
-                @include('layouts.navbars.navbar')
-
-                <div class="content-wrapper">
-                    @yield('content')
-                </div>
-
-                @include('layouts.footer.nav')
+            <div class="content-wrapper">
+                @yield('content')
             </div>
 
+            @include('layouts.footer.nav')
         </div>
 
-    </body>
+    </div>
+</body>
+
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}" type="text/javascript"></script>
@@ -70,6 +76,10 @@ SISTEM BANSOS - Aplikasi Manajemen Bantuan Sosial
     <script src="{{ asset('assets/js/demo.js') }}"></script>
     <!-- Enhanced Layout Scripts -->
     <script src="{{ asset('assets/js/layout-enhancements.js') }}" type="text/javascript"></script>
+
+    @stack('js')
+
+    <script>
         $(document).ready(function () {
             // Initialize tooltips
             $('[data-toggle="tooltip"]').tooltip({
